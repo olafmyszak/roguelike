@@ -5,7 +5,7 @@ Technologie: Java? Python?
 Fabuła: Coś prostego.
 1) Proste okradanie grobów zmienia sie w ucieczke z katakumb, a potem z cmentarza.
 
-Mechaniki:
+Mechaniki:\
 -walenie ze szpadla\
 -dash\
 -chodzenie we wszystkie strony\
