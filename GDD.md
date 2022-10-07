@@ -10,12 +10,12 @@ Mechaniki:
 -dash\
 -chodzenie we wszystkie strony\
 -potki\
--coraz lepsze itemki po drodze\
+-coraz lepsze itemki po drodze
 
-Potwory:
+Potwory:\
 -szkielety\
 -zombie\
 -nietoperze\
--ostateczny boss nekromanta\
+-ostateczny boss nekromanta
 
 
