@@ -1,21 +1,39 @@
-Nazwa: TBD (Grave Runner?)
+Nazwa: TBD
 
 Technologie: Java? Python?
 
-Fabuła: Coś prostego.
-1) Proste okradanie grobów zmienia sie w ucieczke z katakumb, a potem z cmentarza.
+Fabuła: 
+
 
 Mechaniki:\
 -walenie ze szpadla\
 -dash\
--chodzenie we wszystkie strony\
--potki\
--coraz lepsze itemki po drodze
+-coraz lepsze przedmioty po drodze\
+-czas rzeczywisty\
+-losowo generowany świat i potwory
 
-Potwory:\
+Postacie:\
+-bezimienny protagonista:\
+    *mężczyzna\
+    *30-45 lat\
+    *doświadczony złodziej i wojownik\
+
+-antagonista:\
+    *silny nekromanta
+
+Przeciwnicy:\
 -szkielety\
 -zombie\
 -nietoperze\
 -ostateczny boss nekromanta
 
+Przedmioty
+-łopata\
+-święty miecz\
+-święty granat ręczny\
+-mikstury\
+
+Widok: Raczej 2D z góry.
+
+Gameplay: Gracz zaczyna na cmentarzu, powoli podążając dalej (2-3 poziomy). Następnie wkracza w głąb katakumb (2-4 poziomy), by ostatecznie zmierzyć się z nekromantą na samym końcu. Możliwe również jakieś minibossy na końcu każdego poziomu.
 
