@@ -22,4 +22,28 @@ public class Point {
         int y = random.nextInt(yMin, yMax);
         return new Point(x,y);
     }
+
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 }
