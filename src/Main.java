@@ -1,4 +1,4 @@
-import dungeon.*;
+import roguelike.*;
 
 public class Main {
     public static void main(String[] args) {

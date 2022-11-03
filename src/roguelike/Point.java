@@ -1,4 +1,4 @@
-package dungeon;
+package roguelike;
 
 import java.util.Random;
 
@@ -25,14 +25,6 @@ public class Point {
 
     public int getX() {
         return x;
-    }
-
-    @Override
-    public String toString() {
-        return "Point{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
     }
 
     public int getY() {
