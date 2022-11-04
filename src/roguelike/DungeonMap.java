@@ -1,21 +1,18 @@
-package dungeon;
+package roguelike;
 
-import java.util.Objects;
-
-public class Grid {
+public class DungeonMap {
     private final int length;
     private final int height;
     private final Player player;
     private final Point coordinates;
+    private final Tile[][] tiles;
 
-    private final String[][] grid;
-
-    public Grid(int length, int height) {
+    public DungeonMap(int length, int height) {
         this.length = length;
         this.height = height;
         this.player = new Player(length, height);
         this.coordinates = player.getCoordinates();
-        this.grid = new String[length][height];
+        this.tiles = new Tile[length][height];
     }
 
     public Player getPlayer() {
@@ -24,49 +21,44 @@ public class Grid {
 
     public void createGrid() {
         for (int cols = 0; cols < height; ++cols) {
-            grid[0][cols] = "#";
-            grid[length - 1][cols] = "#";
+            tiles[0][cols] = new Tile(Symbols.WALL);
+            tiles[length - 1][cols] = new Tile(Symbols.WALL);
         }
 
         for (int rows = 0; rows < length; ++rows) {
-            grid[rows][0] = "#";
-            grid[rows][height - 1] = "#";
+            tiles[rows][0] = new Tile(Symbols.WALL);
+            tiles[rows][height - 1] = new Tile(Symbols.WALL);
         }
 
         for (int i = 1; i < length - 1; ++i) {
             for (int j = 1; j < height - 1; ++j) {
-                grid[i][j] = "-";
+                tiles[i][j] = new Tile(Symbols.FLOOR);
             }
         }
 
         drawPlayer();
     }
 
-    boolean wallDetection(Point point){
-        int x = point.getX();
-        int y = point.getY();
-
-        return Objects.equals(grid[x][y], "#");
-    }
-
-    void drawPlayer(){
-        if(wallDetection(coordinates)){
-           player.reverseMove();
-        }
-
+    void drawPlayer() {
         int x = coordinates.getX();
         int y = coordinates.getY();
 
-        grid[x][y] = "@";
+        if (!tiles[x][y].isAbleToMoveOnThisTile()) {
+            player.reverseMove();
+        }
+
+        x = coordinates.getX();
+        y = coordinates.getY();
+
+        tiles[x][y] = new Tile(Symbols.PLAYER);
     }
 
     public void printGrid() {
         for (int i = 0; i < length; ++i) {
             for (int j = 0; j < height; ++j) {
-                System.out.print(grid[i][j] + " ");
+                System.out.print(tiles[i][j].getCharacterSymbol() + " ");
             }
             System.out.println();
         }
     }
-
 }

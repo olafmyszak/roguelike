@@ -1,4 +1,4 @@
-package dungeon;
+package roguelike;
 
 public class Player {
     private final Point coordinates;
