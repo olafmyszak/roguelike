@@ -1,6 +1,6 @@
 Nazwa: TBD
 
-Technologie: Java? Python?
+Technologie: Java
 
 Fabuła: 
 
@@ -9,7 +9,7 @@ Mechaniki:\
 -walenie ze szpadla\
 -dash\
 -coraz lepsze przedmioty po drodze\
--czas rzeczywisty\
+-turowosc\
 -losowo generowany świat i potwory
 
 Postacie:\
@@ -33,7 +33,7 @@ Przedmioty
 -święty granat ręczny\
 -mikstury\
 
-Widok: Raczej 2D z góry.
+Grafika: ASCII
 
 Gameplay: Gracz zaczyna na cmentarzu, powoli podążając dalej (2-3 poziomy). Następnie wkracza w głąb katakumb (2-4 poziomy), by ostatecznie zmierzyć się z nekromantą na samym końcu. Możliwe również jakieś minibossy na końcu każdego poziomu.
 
