@@ -1,22 +1,13 @@
 package roguelike;
 
-public class Player {
-    private final Point coordinates;
+public class Player extends Character{
     private String previousCommand;
 
     public Player(int length, int height){
         coordinates = new Point().randomPoint(1, 1, length-1, height-1);
     }
 
-    public Point getCoordinates(){
-        return coordinates;
-    }
-
-    public void setCoordinates(int x, int y) {
-        coordinates.setX(x);
-        coordinates.setY(y);
-    }
-
+    @Override
     public void move(String command){
         previousCommand = command;
         switch (command){

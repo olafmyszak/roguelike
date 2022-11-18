@@ -17,10 +17,16 @@ public class UserInterface {
     public void run(){
         String command = null;
         while  (!Objects.equals(command, "q")){
+            clearScreen();
             dungeonMap.createGrid();
             dungeonMap.printGrid();
             command = scanner.next();
             player.move(command);
         }
+    }
+
+    public void clearScreen(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

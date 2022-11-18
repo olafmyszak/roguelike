@@ -4,14 +4,14 @@ public class DungeonMap {
     private final int length;
     private final int height;
     private final Player player;
-    private final Point coordinates;
+    private final Monster monster;
     private final Tile[][] tiles;
 
     public DungeonMap(int length, int height) {
         this.length = length;
         this.height = height;
         this.player = new Player(length, height);
-        this.coordinates = player.getCoordinates();
+        this.monster = new Monster(length, height);
         this.tiles = new Tile[length][height];
     }
 
@@ -37,21 +37,30 @@ public class DungeonMap {
         }
 
         drawPlayer();
+        drawMonster();
     }
 
-    void drawPlayer() {
-        int x = coordinates.getX();
-        int y = coordinates.getY();
+    private void drawPlayer() {
+        int x = player.coordinates.getX();
+        int y = player.coordinates.getY();
 
         if (!tiles[x][y].isAbleToMoveOnThisTile()) {
             player.reverseMove();
         }
 
-        x = coordinates.getX();
-        y = coordinates.getY();
+        x = player.coordinates.getX();
+        y = player.coordinates.getY();
 
         tiles[x][y] = new Tile(Symbols.PLAYER);
     }
+
+    private void drawMonster(){
+        int x = monster.coordinates.getX();
+        int y = monster.coordinates.getY();
+
+        tiles[x][y] = new Tile(Symbols.MONSTER);
+    }
+
 
     public void printGrid() {
         for (int i = 0; i < length; ++i) {
@@ -60,5 +69,37 @@ public class DungeonMap {
             }
             System.out.println();
         }
+    }
+
+    private class Pathfinding{
+        private class Pair<T>{
+            private T first;
+            private T second;
+
+            public Pair(T first, T second){
+                this.first = first;
+                this.second = second;
+            }
+
+            public T getSecond() {
+                return second;
+            }
+
+            public void setFirst(T first) {
+                this.first = first;
+            }
+
+            public T getFirst() {
+                return first;
+            }
+
+            public void setSecond(T second) {
+                this.second = second;
+            }
+        }
+
+
+
+
     }
 }
