@@ -71,35 +71,29 @@ public class DungeonMap {
         }
     }
 
-    private class Pathfinding{
-        private class Pair<T>{
-            private T first;
-            private T second;
+    public void simplePathfinding(Monster monster){
+        Point monsterCoordinates = monster.getCoordinates();
+        int monsterX = monsterCoordinates.getX();
+        int monsterY = monsterCoordinates.getY();
 
-            public Pair(T first, T second){
-                this.first = first;
-                this.second = second;
-            }
+        int playerX = player.coordinates.getX();
+        int playerY = player.coordinates.getY();
 
-            public T getSecond() {
-                return second;
-            }
 
-            public void setFirst(T first) {
-                this.first = first;
-            }
-
-            public T getFirst() {
-                return first;
-            }
-
-            public void setSecond(T second) {
-                this.second = second;
-            }
+        if(monsterX > playerX){
+            monsterCoordinates.setX(monsterX - 1);
         }
+        else if(monsterX < playerX){
+            monsterCoordinates.setX(monsterX + 1);
+        }
+        else if(monsterY > playerY){
+            monsterCoordinates.setY(monsterY - 1);
+        }else {
+            monsterCoordinates.setY(monsterY + 1);
+        }
+    }
 
-
-
-
+    public Monster getMonster() {
+        return monster;
     }
 }
