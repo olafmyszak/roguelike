@@ -1,7 +1,8 @@
 package roguelike;
 
-public class Player extends Character{
+public class Player extends GameCharacter {
     private String previousCommand;
+    private int experience;
 
     public Player(int length, int height){
         coordinates = new Point().randomPoint(1, 1, length-1, height-1);

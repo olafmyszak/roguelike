@@ -46,6 +46,7 @@ public class Node implements Comparable<Node> {
         }
     }
 
+
     public static Node aStar(Node start, Node target){
         PriorityQueue<Node> closed = new PriorityQueue<>();
         PriorityQueue<Node> open = new PriorityQueue<>();
