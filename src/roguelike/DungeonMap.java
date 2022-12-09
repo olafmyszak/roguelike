@@ -7,10 +7,18 @@ public class DungeonMap {
     private final Monster monster;
     private final Tile[][] tiles;
 
-    public DungeonMap(int length, int height) {
+    public DungeonMap(int length, int height, Player player) {
         this.length = length;
         this.height = height;
-        this.player = new Player(length, height);
+        this.player = player;
+        this.monster = new Monster(length, height);
+        this.tiles = new Tile[length][height];
+    }
+
+    public DungeonMap(int length, int height, String name){
+        this.length = length;
+        this.height = height;
+        this.player = new Player(length, height, name);
         this.monster = new Monster(length, height);
         this.tiles = new Tile[length][height];
     }
@@ -79,17 +87,16 @@ public class DungeonMap {
         int playerX = player.coordinates.getX();
         int playerY = player.coordinates.getY();
 
-
         if(monsterX > playerX){
-            monsterCoordinates.setX(monsterX - 1);
+            monster.move("w");
         }
         else if(monsterX < playerX){
-            monsterCoordinates.setX(monsterX + 1);
+            monster.move("s");
         }
         else if(monsterY > playerY){
-            monsterCoordinates.setY(monsterY - 1);
+            monster.move("a");
         }else {
-            monsterCoordinates.setY(monsterY + 1);
+            monster.move("d");
         }
     }
 

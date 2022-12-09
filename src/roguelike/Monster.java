@@ -5,10 +5,5 @@ public class Monster extends GameCharacter {
         coordinates = new Point().randomPoint(1,1, length-1, height-1);
     }
 
-    @Override
-    protected void move(String command) {
-
-    }
-
 
 }
