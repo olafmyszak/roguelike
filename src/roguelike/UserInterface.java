@@ -4,28 +4,23 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class UserInterface {
-    private final Scanner scanner;
-    private final DungeonMap dungeonMap;
-    private final Player player;
-    private final Monster monster;
+    private final GameEngine engine;
 
-    public UserInterface(int length, int height, String name) {
-        this.scanner = new Scanner(System.in);
-        this.dungeonMap = new DungeonMap(length, height, name);
-        player = dungeonMap.getPlayer();
-        monster = dungeonMap.getMonster();
+    public UserInterface(int length, int height, String name){
+        this.engine = new GameEngine(length, height, name);
     }
 
     public void run() {
         String command;
+        Scanner scanner = new Scanner(System.in);
+
+        clearScreen();
+        engine.start();
         do {
-            clearScreen();
-            dungeonMap.createGrid();
-            dungeonMap.printGrid();
             command = scanner.next();
-            player.move(command);
-            dungeonMap.simplePathfinding(monster);
-        } while (!command.equals("q"));
+            clearScreen();
+            engine.run(command);
+        } while (!command.equalsIgnoreCase("q"));
     }
 
     public void clearScreen() {

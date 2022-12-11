@@ -1,33 +1,26 @@
 package roguelike;
 
+import java.util.List;
+
 public class DungeonMap {
     private final int length;
     private final int height;
-    private final Player player;
-    private final Monster monster;
     private final Tile[][] tiles;
 
-    public DungeonMap(int length, int height, Player player) {
+    public DungeonMap(int length, int height) {
         this.length = length;
         this.height = height;
-        this.player = player;
-        this.monster = new Monster(length, height);
         this.tiles = new Tile[length][height];
     }
-
-    public DungeonMap(int length, int height, String name){
-        this.length = length;
-        this.height = height;
-        this.player = new Player(length, height, name);
-        this.monster = new Monster(length, height);
-        this.tiles = new Tile[length][height];
+    public int getLength() {
+        return length;
     }
 
-    public Player getPlayer() {
-        return player;
+    public int getHeight() {
+        return height;
     }
 
-    public void createGrid() {
+    public void createGrid(Player player, List<Monster> monsters) {
         for (int cols = 0; cols < height; ++cols) {
             tiles[0][cols] = new Tile(Symbols.WALL);
             tiles[length - 1][cols] = new Tile(Symbols.WALL);
@@ -44,31 +37,32 @@ public class DungeonMap {
             }
         }
 
-        drawPlayer();
-        drawMonster();
+        drawPlayer(player);
+        drawMonster(monsters);
     }
 
-    private void drawPlayer() {
-        int x = player.coordinates.getX();
-        int y = player.coordinates.getY();
+    private void drawPlayer(Player player) {
+        int x = player.getX();
+        int y = player.getY();
 
         if (!tiles[x][y].isAbleToMoveOnThisTile()) {
             player.reverseMove();
         }
 
-        x = player.coordinates.getX();
-        y = player.coordinates.getY();
+        x = player.getX();
+        y = player.getY();
 
         tiles[x][y] = new Tile(Symbols.PLAYER);
     }
 
-    private void drawMonster(){
-        int x = monster.coordinates.getX();
-        int y = monster.coordinates.getY();
+    private void drawMonster(List<Monster> monsters) {
+        for (Monster monster : monsters) {
+            int x = monster.getX();
+            int y = monster.getY();
 
-        tiles[x][y] = new Tile(Symbols.MONSTER);
+            tiles[x][y] = new Tile(Symbols.MONSTER);
+        }
     }
-
 
     public void printGrid() {
         for (int i = 0; i < length; ++i) {
@@ -77,30 +71,5 @@ public class DungeonMap {
             }
             System.out.println();
         }
-    }
-
-    public void simplePathfinding(Monster monster){
-        Point monsterCoordinates = monster.getCoordinates();
-        int monsterX = monsterCoordinates.getX();
-        int monsterY = monsterCoordinates.getY();
-
-        int playerX = player.coordinates.getX();
-        int playerY = player.coordinates.getY();
-
-        if(monsterX > playerX){
-            monster.move("w");
-        }
-        else if(monsterX < playerX){
-            monster.move("s");
-        }
-        else if(monsterY > playerY){
-            monster.move("a");
-        }else {
-            monster.move("d");
-        }
-    }
-
-    public Monster getMonster() {
-        return monster;
     }
 }

@@ -1,26 +1,32 @@
 package roguelike;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class GameEngine {
-    private final DungeonMap dungeonMap;
-    private final int currentLevel;
+    private final int length;
+    private final int height;
+    private final int currentLevel = 0;
     private final Player player;
-    private final List<Monster> monsterList;
+    private final ArrayList<Level> levels;
     private final Queue<GameCharacter> eventQueue;
 
-    public GameEngine(DungeonMap dungeonMap, int currentLevel, Player player) {
-        this.dungeonMap = dungeonMap;
-        this.currentLevel = currentLevel;
-        this.player = player;
-        this.monsterList = new ArrayList<>();
+
+    public GameEngine(int length, int height, String name) {
+        this.length = length;
+        this.height = height;
+        this.player = new Player(length, height, name);
+        this.levels = new ArrayList<>();
         this.eventQueue = new PriorityQueue<>();
     }
 
-    public void run(){
-
+    public void run(String command) {
+        player.move(command);
+        levels.get(currentLevel).run(player);
     }
+
+    public void start(){
+        levels.add( new Level(new DungeonMap(length, height), "lol", "lol"));
+        levels.get(0).start(player);
+    }
+
 }
