@@ -8,4 +8,9 @@ public class Attribute {
         this.base = base;
         this.current = current;
     }
+
+    public Attribute(int base){
+        this.base = base;
+        this.current = base;
+    }
 }

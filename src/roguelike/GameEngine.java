@@ -10,7 +10,6 @@ public class GameEngine {
     private final ArrayList<Level> levels;
     private final Queue<GameCharacter> eventQueue;
 
-
     public GameEngine(int length, int height, String name) {
         this.length = length;
         this.height = height;
@@ -26,7 +25,9 @@ public class GameEngine {
 
     public void start(){
         levels.add( new Level(new DungeonMap(length, height), "lol", "lol"));
-        levels.get(0).start(player);
+        levels.get(0).start(player, 0);
     }
+
+
 
 }

@@ -12,6 +12,20 @@ public abstract class GameCharacter {
     protected Attribute mana;
     protected int level;
 
+    public GameCharacter(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
+        this.coordinates = new Point().randomPoint(1, 1, length-1, height-1);
+        this.name = name;
+        this.description = description;
+        this.healthPoints = healthPoints;
+        this.speed = speed;
+        this.strength = strength;
+        this.intelligence = intelligence;
+        this.dexterity = dexterity;
+        this.mana = mana;
+        this.level = level;
+    }
+
+
     protected void move(String command) {
         command = command.toLowerCase();
         switch (command){
@@ -32,23 +46,6 @@ public abstract class GameCharacter {
 
     public int getY(){
         return coordinates.getY();
-    }
-
-    public GameCharacter(String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
-        this.name = name;
-        this.description = description;
-        this.healthPoints = healthPoints;
-        this.speed = speed;
-        this.strength = strength;
-        this.intelligence = intelligence;
-        this.dexterity = dexterity;
-        this.mana = mana;
-        this.level = level;
-    }
-
-    public GameCharacter()
-    {
-
     }
 
     public void setCoordinates(int x, int y) {

@@ -5,13 +5,11 @@ public class Player extends GameCharacter {
     private int experience;
 
     public Player(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level){
-        super(name, description, healthPoints, speed, strength, intelligence, dexterity, mana, level);
-        coordinates = new Point().randomPoint(1, 1, length-1, height-1);
+        super(length, height,name, description, healthPoints, speed, strength, intelligence, dexterity, mana, level);
     }
 
     public Player(int length, int height, String name){
-        super(name, " ", new Attribute(20,20), new Attribute(10, 10), new Attribute(5,5), new Attribute(5,5), new Attribute(5,5), new Attribute(20,20), 1);
-        coordinates = new Point().randomPoint(1, 1, length-1, height-1);
+        super(length, height, name, "You. The hero.", new Attribute(30), new Attribute(10), new Attribute(5), new Attribute(5), new Attribute(5), new Attribute(20), 1);
     }
 
     @Override
