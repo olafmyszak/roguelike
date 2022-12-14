@@ -1,5 +1,7 @@
 package roguelike;
 
+import java.util.List;
+
 public abstract class GameCharacter {
     protected Point coordinates;
     protected String name;
@@ -11,6 +13,8 @@ public abstract class GameCharacter {
     protected Attribute dexterity;
     protected Attribute mana;
     protected int level;
+    protected List<Ability> abilities;
+
 
     public GameCharacter(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
         this.coordinates = new Point().randomPoint(1, 1, length-1, height-1);

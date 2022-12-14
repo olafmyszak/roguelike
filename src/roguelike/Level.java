@@ -59,4 +59,8 @@ public class Level {
             }
         }
     }
+
+    public List<GameCharacter> getMonsterList() {
+        return monsterList;
+    }
 }

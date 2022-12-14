@@ -28,6 +28,9 @@ public class GameEngine {
         levels.get(0).start(player, 0);
     }
 
+    public void fight(){
+
+    }
 
 
 }

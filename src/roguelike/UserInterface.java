@@ -15,7 +15,7 @@ public class UserInterface {
     public void run() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
 
-        playTitleScreen();
+        //playTitleScreen();
 
         System.out.print("Enter the name of your hero: ");
         String command = scanner.next();
