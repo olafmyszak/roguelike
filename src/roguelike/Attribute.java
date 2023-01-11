@@ -13,4 +13,12 @@ public class Attribute {
         this.base = base;
         this.current = base;
     }
+
+    public int getBase() {
+        return base;
+    }
+
+    public int getCurrent() {
+        return current;
+    }
 }

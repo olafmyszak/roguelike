@@ -16,7 +16,7 @@ public class Point {
         y = 0;
     }
 
-    public Point randomPoint(int xMin, int yMin, int xMax, int yMax){
+    public static Point randomPoint(int xMin, int yMin, int xMax, int yMax){
         Random random = new Random();
         int x = random.nextInt(xMin, xMax);
         int y = random.nextInt(yMin, yMax);

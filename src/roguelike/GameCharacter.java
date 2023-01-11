@@ -1,5 +1,6 @@
 package roguelike;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GameCharacter {
@@ -17,7 +18,7 @@ public abstract class GameCharacter {
 
 
     public GameCharacter(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
-        this.coordinates = new Point().randomPoint(1, 1, length-1, height-1);
+        this.coordinates = Point.randomPoint(1, 1, length-1, height-1);
         this.name = name;
         this.description = description;
         this.healthPoints = healthPoints;
@@ -27,6 +28,21 @@ public abstract class GameCharacter {
         this.dexterity = dexterity;
         this.mana = mana;
         this.level = level;
+        this.abilities = new ArrayList<>();
+    }
+
+    public GameCharacter(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level, List<Ability> abilities) {
+        this.coordinates = Point.randomPoint(1, 1, length-1, height-1);
+        this.name = name;
+        this.description = description;
+        this.healthPoints = healthPoints;
+        this.speed = speed;
+        this.strength = strength;
+        this.intelligence = intelligence;
+        this.dexterity = dexterity;
+        this.mana = mana;
+        this.level = level;
+        this.abilities = abilities;
     }
 
 
