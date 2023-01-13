@@ -6,7 +6,9 @@ public enum PlayerSlots {
     RIGHT_HAND,
     CHEST,
     LEGS,
-    FEET;
+    FEET,
+    LEFT_FINGER,
+    RIGHT_FINGER;
 
     private static final int size = PlayerSlots.values().length;
 

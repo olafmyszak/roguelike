@@ -7,6 +7,7 @@ import java.util.Random;
 public class Level {
     private final DungeonMap dungeonMap;
     private final List<GameCharacter> monsterList;
+    private final List<Item> itemList;
     private final String name;
     private final String description;
 
@@ -15,17 +16,19 @@ public class Level {
         this.monsterList = new ArrayList<>();
         this.name = name;
         this.description = description;
+        this.itemList = new ArrayList<>();
     }
 
     public void start(Player player, int currentLevel){
         generateMonsters(currentLevel);
-        dungeonMap.createGrid(player, monsterList);
+        generateItems();
+        dungeonMap.createGrid(player, monsterList, itemList);
         dungeonMap.printGrid();
     }
 
     public void run(Player player){
         simplePathfinding(monsterList, player.getX(), player.getY());
-        dungeonMap.createGrid(player, monsterList);
+        dungeonMap.createGrid(player, monsterList, itemList);
         dungeonMap.printGrid();
     }
 
@@ -39,6 +42,21 @@ public class Level {
 
         for(int i=0; i<numberOfMonsters; ++i) {
             monsterList.add(MonsterFactory.getMonster(MonsterType.getRandom(), maxLength, maxHeight, currentLevel));
+        }
+    }
+
+    private void generateItems(){
+        final int maxLength = dungeonMap.getLength();
+        final int maxHeight = dungeonMap.getHeight();
+        final int minNumberOfItems = 1;
+        final int maxNumberOfItems = 5;
+
+        PossibleItems possibleItems = new PossibleItems(maxLength, maxHeight);
+
+        int numberOfItems = new Random().nextInt(minNumberOfItems, maxNumberOfItems);
+
+        for(int i=0; i<numberOfItems; ++i){
+            itemList.add(possibleItems.getRandom());
         }
     }
 

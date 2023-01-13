@@ -8,15 +8,14 @@ public class GameEngine {
     private final int currentLevel = 0;
     private final Player player;
     private final ArrayList<Level> levels;
-    private final Queue<GameCharacter> eventQueue;
+    private final PriorityQueue<GameCharacter> eventQueue;
 
     public GameEngine(int length, int height, String name) {
         this.length = length;
         this.height = height;
         this.player = new Player(length, height, name);
         this.levels = new ArrayList<>();
-        // this.eventQueue = new PriorityQueue<>((o1, o2) -> Integer.compare(o2.speed.getCurrent(), o1.speed.getCurrent()));
-        this.eventQueue = new PriorityQueue<>((a,b) -> b.speed.getCurrent() - a.speed.getCurrent());
+        this.eventQueue = new PriorityQueue<>((a,b) -> b.basicAttributes.speed.getCurrent() - a.basicAttributes.speed.getCurrent());
     }
 
     public void run(String command) {
@@ -25,13 +24,11 @@ public class GameEngine {
     }
 
     public void start(){
-        levels.add(new Level(new DungeonMap(length, height), "lol", "lol"));
+        levels.add(new Level(new DungeonMap(length, height), "name", "desc"));
         levels.get(0).start(player, 0);
 
         eventQueue.add(player);
-        eventQueue.add(new Vampire(length, height, currentLevel));
-        System.out.println(eventQueue);
-
+        eventQueue.addAll(levels.get(0).getMonsterList());
     }
 
     public void fight(){

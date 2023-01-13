@@ -20,7 +20,7 @@ public class DungeonMap {
         return height;
     }
 
-    public void createGrid(Player player, List<GameCharacter> monsters) {
+    public void createGrid(Player player, List<GameCharacter> monsters, List<Item> items) {
         for (int cols = 0; cols < height; ++cols) {
             tiles[0][cols] = new Tile(Symbols.WALL);
             tiles[length - 1][cols] = new Tile(Symbols.WALL);
@@ -39,6 +39,7 @@ public class DungeonMap {
 
         drawPlayer(player);
         drawMonster(monsters);
+        drawItems(items);
     }
 
     private void drawPlayer(Player player) {
@@ -61,6 +62,15 @@ public class DungeonMap {
             int y = monster.getY();
 
             tiles[x][y] = new Tile(Symbols.MONSTER);
+        }
+    }
+
+    private void drawItems(List<Item> items){
+        for (Item item : items) {
+            int x = item.getX();
+            int y = item.getY();
+
+            tiles[x][y] = new Tile(Symbols.ITEM);
         }
     }
 

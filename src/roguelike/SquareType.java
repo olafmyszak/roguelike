@@ -26,6 +26,7 @@ public class SquareType {
             case FLOOR -> "-";
             case PLAYER -> "@";
             case MONSTER -> "?";
+            case ITEM -> "&";
         };
     }
 }

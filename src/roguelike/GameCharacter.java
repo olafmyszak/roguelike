@@ -7,12 +7,7 @@ public abstract class GameCharacter {
     protected Point coordinates;
     protected String name;
     protected String description;
-    protected Attribute healthPoints;
-    protected Attribute speed;
-    protected Attribute strength;
-    protected Attribute intelligence;
-    protected Attribute dexterity;
-    protected Attribute mana;
+    protected BasicAttributes basicAttributes;
     protected int level;
     protected List<Ability> abilities;
 
@@ -21,12 +16,7 @@ public abstract class GameCharacter {
         this.coordinates = Point.randomPoint(1, 1, length-1, height-1);
         this.name = name;
         this.description = description;
-        this.healthPoints = healthPoints;
-        this.speed = speed;
-        this.strength = strength;
-        this.intelligence = intelligence;
-        this.dexterity = dexterity;
-        this.mana = mana;
+        this.basicAttributes = new BasicAttributes(healthPoints, speed, strength, intelligence, dexterity, mana);
         this.level = level;
         this.abilities = new ArrayList<>();
     }
@@ -35,12 +25,7 @@ public abstract class GameCharacter {
         this.coordinates = Point.randomPoint(1, 1, length-1, height-1);
         this.name = name;
         this.description = description;
-        this.healthPoints = healthPoints;
-        this.speed = speed;
-        this.strength = strength;
-        this.intelligence = intelligence;
-        this.dexterity = dexterity;
-        this.mana = mana;
+        this.basicAttributes = new BasicAttributes(healthPoints, speed, strength, intelligence, dexterity, mana);
         this.level = level;
         this.abilities = abilities;
     }

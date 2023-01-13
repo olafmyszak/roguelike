@@ -13,4 +13,7 @@ public class Inventory {
         this.storage = new Item[storageSize];
     }
 
+    public List<Item> getWearableSlots() {
+        return wearableSlots;
+    }
 }

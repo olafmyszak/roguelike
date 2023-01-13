@@ -4,5 +4,6 @@ public enum Symbols {
     WALL,
     FLOOR,
     PLAYER,
-    MONSTER
+    MONSTER,
+    ITEM
 }
