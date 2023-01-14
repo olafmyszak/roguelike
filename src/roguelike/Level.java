@@ -40,8 +40,10 @@ public class Level {
 
         int numberOfMonsters = new Random().nextInt(minNumberOfMonsters, maxNumberOfMonsters);
 
+        MonsterFactory monsterFactory = new MonsterFactory(maxLength, maxHeight, currentLevel);
+
         for(int i=0; i<numberOfMonsters; ++i) {
-            monsterList.add(MonsterFactory.getMonster(MonsterType.getRandom(), maxLength, maxHeight, currentLevel));
+            monsterList.add(monsterFactory.getRandomMonster());
         }
     }
 

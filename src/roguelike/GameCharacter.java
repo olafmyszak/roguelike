@@ -3,7 +3,7 @@ package roguelike;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GameCharacter {
+public class GameCharacter {
     protected Point coordinates;
     protected String name;
     protected String description;
