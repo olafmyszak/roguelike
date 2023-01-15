@@ -1,6 +1,7 @@
 package roguelike;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class GameEngine {
     private final int length;
@@ -15,7 +16,7 @@ public class GameEngine {
         this.height = height;
         this.player = new Player(length, height, name);
         this.levels = new ArrayList<>();
-        this.eventQueue = new PriorityQueue<>((a,b) -> b.basicAttributes.speed.getCurrent() - a.basicAttributes.speed.getCurrent());
+        this.eventQueue = new PriorityQueue<>((a, b) -> b.basicAttributes.speed.getCurrent() - a.basicAttributes.speed.getCurrent());
     }
 
     public void run(String command) {
@@ -23,7 +24,7 @@ public class GameEngine {
         levels.get(currentLevel).run(player);
     }
 
-    public void start(){
+    public void start() {
         levels.add(new Level(new DungeonMap(length, height), "name", "desc"));
         levels.get(0).start(player, 0);
 
@@ -31,7 +32,7 @@ public class GameEngine {
         eventQueue.addAll(levels.get(0).getMonsterList());
     }
 
-    public void fight(){
+    public void fight() {
 
     }
 }

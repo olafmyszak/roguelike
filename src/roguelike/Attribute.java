@@ -9,7 +9,7 @@ public class Attribute {
         this.current = current;
     }
 
-    public Attribute(int base){
+    public Attribute(int base) {
         this.base = base;
         this.current = base;
     }

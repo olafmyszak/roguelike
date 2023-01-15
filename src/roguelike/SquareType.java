@@ -20,7 +20,7 @@ public class SquareType {
         this.name = name;
     }
 
-    public String getCharacterSymbol(){
+    public String getCharacterSymbol() {
         return switch (symbol) {
             case WALL -> "#";
             case FLOOR -> "-";

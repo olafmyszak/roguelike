@@ -10,10 +10,8 @@ public class GameCharacter {
     protected BasicAttributes basicAttributes;
     protected int level;
     protected List<Ability> abilities;
-
-
     public GameCharacter(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
-        this.coordinates = Point.randomPoint(1, 1, length-1, height-1);
+        this.coordinates = Point.randomPoint(1, 1, length - 1, height - 1);
         this.name = name;
         this.description = description;
         this.basicAttributes = new BasicAttributes(healthPoints, speed, strength, intelligence, dexterity, mana);
@@ -22,7 +20,7 @@ public class GameCharacter {
     }
 
     public GameCharacter(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level, List<Ability> abilities) {
-        this.coordinates = Point.randomPoint(1, 1, length-1, height-1);
+        this.coordinates = Point.randomPoint(1, 1, length - 1, height - 1);
         this.name = name;
         this.description = description;
         this.basicAttributes = new BasicAttributes(healthPoints, speed, strength, intelligence, dexterity, mana);
@@ -33,23 +31,23 @@ public class GameCharacter {
 
     protected void move(String command) {
         command = command.toLowerCase();
-        switch (command){
-            case "w" -> coordinates.setX(coordinates.getX()-1);
-            case "s" -> coordinates.setX(coordinates.getX()+1);
-            case "a" -> coordinates.setY(coordinates.getY()-1);
-            case "d" -> coordinates.setY(coordinates.getY()+1);
+        switch (command) {
+            case "w" -> coordinates.setX(coordinates.getX() - 1);
+            case "s" -> coordinates.setX(coordinates.getX() + 1);
+            case "a" -> coordinates.setY(coordinates.getY() - 1);
+            case "d" -> coordinates.setY(coordinates.getY() + 1);
         }
     }
 
-    public Point getCoordinates(){
+    public Point getCoordinates() {
         return coordinates;
     }
 
-    public int getX(){
+    public int getX() {
         return coordinates.getX();
     }
 
-    public int getY(){
+    public int getY() {
         return coordinates.getY();
     }
 

@@ -47,36 +47,36 @@ public class Node implements Comparable<Node> {
     }
 
 
-    public static Node aStar(Node start, Node target){
+    public static Node aStar(Node start, Node target) {
         PriorityQueue<Node> closed = new PriorityQueue<>();
         PriorityQueue<Node> open = new PriorityQueue<>();
 
         start.f = start.g + start.calculateHeuristic(target);
         open.add(start);
 
-        while (!open.isEmpty()){
+        while (!open.isEmpty()) {
             Node n = open.peek();
 
-            if(n == target){
+            if (n == target) {
                 return n;
             }
 
-            for(Node.Edge edge : n.neighbours){
+            for (Node.Edge edge : n.neighbours) {
                 Node m = edge.node;
                 double totalWeight = n.g + edge.weight;
 
-                if(!open.contains(m) && !closed.contains(m)){
+                if (!open.contains(m) && !closed.contains(m)) {
                     m.parent = n;
                     m.g = totalWeight;
                     m.f = m.g + m.calculateHeuristic(target);
                     open.add(m);
-                }else {
-                    if(totalWeight < m.g){
+                } else {
+                    if (totalWeight < m.g) {
                         m.parent = n;
                         m.g = totalWeight;
                         m.f = m.g + m.calculateHeuristic(target);
 
-                        if(closed.contains(m)){
+                        if (closed.contains(m)) {
                             closed.remove(m);
                             open.add(m);
                         }

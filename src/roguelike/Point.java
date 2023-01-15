@@ -16,11 +16,11 @@ public class Point {
         y = 0;
     }
 
-    public static Point randomPoint(int xMin, int yMin, int xMax, int yMax){
+    public static Point randomPoint(int xMin, int yMin, int xMax, int yMax) {
         Random random = new Random();
         int x = random.nextInt(xMin, xMax);
         int y = random.nextInt(yMin, yMax);
-        return new Point(x,y);
+        return new Point(x, y);
     }
 
     public int getX() {

@@ -23,15 +23,15 @@ public class MonsterFactory {
         loadMonsters();
     }
 
-    private void loadMonsters(){
+    private void loadMonsters() {
         Path path = Paths.get("monsters.csv");
 
-        try(BufferedReader bufferedReader = Files.newBufferedReader(path, StandardCharsets.US_ASCII)){
+        try (BufferedReader bufferedReader = Files.newBufferedReader(path, StandardCharsets.US_ASCII)) {
             bufferedReader.readLine(); //pomijamy pierwsza linijke
 
             String line = bufferedReader.readLine();
 
-            while (line != null){
+            while (line != null) {
                 String[] values = line.split(";");
 
                 String name = values[0];
@@ -48,12 +48,12 @@ public class MonsterFactory {
                 line = bufferedReader.readLine();
             }
 
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public GameCharacter getRandomMonster(){
+    public GameCharacter getRandomMonster() {
         return monsters.get(new Random().nextInt(monsters.size()));
     }
 }

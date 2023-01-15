@@ -12,6 +12,7 @@ public class DungeonMap {
         this.height = height;
         this.tiles = new Tile[length][height];
     }
+
     public int getLength() {
         return length;
     }
@@ -65,7 +66,7 @@ public class DungeonMap {
         }
     }
 
-    private void drawItems(List<Item> items){
+    private void drawItems(List<Item> items) {
         for (Item item : items) {
             int x = item.getX();
             int y = item.getY();

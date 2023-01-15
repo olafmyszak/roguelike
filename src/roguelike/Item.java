@@ -7,15 +7,15 @@ public class Item {
     private final BasicAttributes basicAttributes;
     private final Point coordinates;
 
-    public Item(String name, String description, int length, int height, PlayerSlots[] goodSlots, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
+    public Item(int length, int height, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
         this.name = name;
         this.description = description;
         this.goodSlots = goodSlots;
         this.basicAttributes = new BasicAttributes(healthPoints, speed, strength, intelligence, dexterity, mana);
-        this.coordinates = new Point(length, height);
+        this.coordinates = Point.randomPoint(1, 1, length - 1, height - 1);
     }
 
-    public Item(String name, String description, Point coordinates, PlayerSlots[] goodSlots, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
+    public Item(Point coordinates, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
         this.name = name;
         this.description = description;
         this.goodSlots = goodSlots;
@@ -23,11 +23,10 @@ public class Item {
         this.coordinates = coordinates;
     }
 
-    public int getX(){
+    public int getX() {
         return coordinates.getX();
     }
-
-    public int getY(){
+    public int getY() {
         return coordinates.getY();
     }
 }

@@ -16,14 +16,14 @@ public class Tile {
         this.squareType = new SquareType(symbol, name);
     }
 
-    public boolean isAbleToMoveOnThisTile(){
+    public boolean isAbleToMoveOnThisTile() {
         return switch (squareType.getCharacterSymbol()) {
             case "-" -> true;
             default -> false;
         };
     }
 
-    public String getCharacterSymbol(){
-       return squareType.getCharacterSymbol();
+    public String getCharacterSymbol() {
+        return squareType.getCharacterSymbol();
     }
 }
