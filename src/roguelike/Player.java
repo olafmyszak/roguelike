@@ -13,9 +13,9 @@ public class Player extends GameCharacter {
     }
 
     @Override
-    public void move(String command) {
+    public void action(String command) {
         previousCommand = command;
-        super.move(command);
+        super.action(command);
     }
 
     public void reverseMove() {

@@ -15,6 +15,14 @@ public class Item {
         this.coordinates = Point.randomPoint(1, 1, length - 1, height - 1);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public Item(Point coordinates, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
         this.name = name;
         this.description = description;

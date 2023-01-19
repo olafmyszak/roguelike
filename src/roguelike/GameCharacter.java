@@ -29,13 +29,33 @@ public class GameCharacter {
     }
 
 
-    protected void move(String command) {
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    private void move(String command) {
         command = command.toLowerCase();
         switch (command) {
             case "w" -> coordinates.setX(coordinates.getX() - 1);
             case "s" -> coordinates.setX(coordinates.getX() + 1);
             case "a" -> coordinates.setY(coordinates.getY() - 1);
             case "d" -> coordinates.setY(coordinates.getY() + 1);
+        }
+    }
+
+    private void attack(){
+
+    }
+
+    public void action(String command){
+        command = command.toLowerCase();
+
+        switch (command){
+            case "w", "a", "s", "d" -> move(command);
         }
     }
 

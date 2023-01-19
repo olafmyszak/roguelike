@@ -8,14 +8,10 @@ public class Level {
     private final DungeonMap dungeonMap;
     private final List<GameCharacter> monsterList;
     private final List<Item> itemList;
-    private final String name;
-    private final String description;
 
     public Level(DungeonMap dungeonMap, String name, String description) {
         this.dungeonMap = dungeonMap;
         this.monsterList = new ArrayList<>();
-        this.name = name;
-        this.description = description;
         this.itemList = new ArrayList<>();
     }
 
@@ -35,8 +31,8 @@ public class Level {
     private void generateMonsters(int currentLevel) {
         final int maxLength = dungeonMap.getLength();
         final int maxHeight = dungeonMap.getHeight();
-        final int minNumberOfMonsters = 2;
-        final int maxNumberOfMonsters = 5;
+        final int minNumberOfMonsters = 1;
+        final int maxNumberOfMonsters = 3;
 
         int numberOfMonsters = new Random().nextInt(minNumberOfMonsters, maxNumberOfMonsters);
 
@@ -50,14 +46,16 @@ public class Level {
     private void generateItems() {
         final int maxLength = dungeonMap.getLength();
         final int maxHeight = dungeonMap.getHeight();
-        final int minNumberOfItems = 1;
-        final int maxNumberOfItems = 5;
 
         PossibleItems possibleItems = new PossibleItems(maxLength, maxHeight);
 
-        int numberOfItems = new Random().nextInt(minNumberOfItems, maxNumberOfItems);
+        int percent = new Random().nextInt(0, 100);
 
-        for (int i = 0; i < numberOfItems; ++i) {
+        if(percent > 50 && percent <=85){
+            itemList.add(possibleItems.getRandom());
+        }
+        else if(percent > 85){
+            itemList.add(possibleItems.getRandom());
             itemList.add(possibleItems.getRandom());
         }
     }
@@ -69,13 +67,13 @@ public class Level {
             int monsterY = monsterCoordinates.getY();
 
             if (monsterX > playerX) {
-                monster.move("w");
+                monster.action("w");
             } else if (monsterX < playerX) {
-                monster.move("s");
+                monster.action("s");
             } else if (monsterY > playerY) {
-                monster.move("a");
+                monster.action("a");
             } else {
-                monster.move("d");
+                monster.action("d");
             }
         }
     }

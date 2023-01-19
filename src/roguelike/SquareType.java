@@ -5,10 +5,6 @@ public class SquareType {
     private String name;
     private String description;
 
-    public SquareType(Symbols symbol) {
-        this.symbol = symbol;
-    }
-
     public SquareType(Symbols symbol, String name, String description) {
         this.symbol = symbol;
         this.name = name;
@@ -30,5 +26,3 @@ public class SquareType {
         };
     }
 }
-
-

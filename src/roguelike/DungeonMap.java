@@ -23,24 +23,24 @@ public class DungeonMap {
 
     public void createGrid(Player player, List<GameCharacter> monsters, List<Item> items) {
         for (int cols = 0; cols < height; ++cols) {
-            tiles[0][cols] = new Tile(Symbols.WALL);
-            tiles[length - 1][cols] = new Tile(Symbols.WALL);
+            tiles[0][cols] = new Tile(Symbols.WALL, "Wall");
+            tiles[length - 1][cols] = new Tile(Symbols.WALL, "Wall");
         }
 
         for (int rows = 0; rows < length; ++rows) {
-            tiles[rows][0] = new Tile(Symbols.WALL);
-            tiles[rows][height - 1] = new Tile(Symbols.WALL);
+            tiles[rows][0] = new Tile(Symbols.WALL, "Wall");
+            tiles[rows][height - 1] = new Tile(Symbols.WALL, "Wall");
         }
 
         for (int i = 1; i < length - 1; ++i) {
             for (int j = 1; j < height - 1; ++j) {
-                tiles[i][j] = new Tile(Symbols.FLOOR);
+                tiles[i][j] = new Tile(Symbols.FLOOR, "Floor");
             }
         }
 
-        drawPlayer(player);
-        drawMonster(monsters);
         drawItems(items);
+        drawMonster(monsters);
+        drawPlayer(player);
     }
 
     private void drawPlayer(Player player) {
@@ -54,7 +54,7 @@ public class DungeonMap {
         x = player.getX();
         y = player.getY();
 
-        tiles[x][y] = new Tile(Symbols.PLAYER);
+        tiles[x][y] = new Tile(Symbols.PLAYER, player.getName(), player.getDescription());
     }
 
     private void drawMonster(List<GameCharacter> monsters) {
@@ -62,7 +62,7 @@ public class DungeonMap {
             int x = monster.getX();
             int y = monster.getY();
 
-            tiles[x][y] = new Tile(Symbols.MONSTER);
+            tiles[x][y] = new Tile(Symbols.MONSTER, monster.getName(), monster.getDescription());
         }
     }
 
@@ -71,7 +71,7 @@ public class DungeonMap {
             int x = item.getX();
             int y = item.getY();
 
-            tiles[x][y] = new Tile(Symbols.ITEM);
+            tiles[x][y] = new Tile(Symbols.ITEM, item.getName(), item.getDescription());
         }
     }
 
