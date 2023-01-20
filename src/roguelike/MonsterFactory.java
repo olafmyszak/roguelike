@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MonsterFactory {
@@ -14,12 +15,14 @@ public class MonsterFactory {
     private final int length;
     private final int height;
     private final int level;
+    private List<Point> usedCoordinates;
 
     public MonsterFactory(int length, int height, int level) {
         this.length = length;
         this.height = height;
         this.level = level;
-        monsters = new ArrayList<>();
+        this.monsters = new ArrayList<>();
+        this.usedCoordinates = new ArrayList<>();
         loadMonsters();
     }
 
@@ -54,6 +57,20 @@ public class MonsterFactory {
     }
 
     public GameCharacter getRandomMonster() {
-        return monsters.get(new Random().nextInt(monsters.size()));
+        GameCharacter monster = monsters.get(new Random().nextInt(monsters.size()));
+
+        boolean flag = false;
+
+        while (!flag) {
+            for (Point usedCoordinate : usedCoordinates) {
+                if (monster.getCoordinates().equals(usedCoordinate)) {
+                    monster = monsters.get(new Random().nextInt(monsters.size()));
+                }
+                flag = true;
+            }
+        }
+        usedCoordinates.add(monster.getCoordinates());
+
+        return monster;
     }
 }

@@ -71,7 +71,9 @@ public class DungeonMap {
             int x = item.getX();
             int y = item.getY();
 
-            tiles[x][y] = new Tile(Symbols.ITEM, item.getName(), item.getDescription());
+            if (x != -1 && y != -1) {
+                tiles[x][y] = new Tile(Symbols.ITEM, item.getName(), item.getDescription());
+            }
         }
     }
 
@@ -82,5 +84,12 @@ public class DungeonMap {
             }
             System.out.println();
         }
+    }
+
+    public void clearTile(Point point) {
+        int x = point.getX();
+        int y = point.getY();
+
+        tiles[x][y] = new Tile(Symbols.FLOOR, "Floor");
     }
 }

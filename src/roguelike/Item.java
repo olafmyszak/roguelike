@@ -5,7 +5,11 @@ public class Item {
     private final String description;
     private final PlayerSlots[] goodSlots;
     private final BasicAttributes basicAttributes;
-    private final Point coordinates;
+    private Point coordinates;
+
+    public Point getCoordinates() {
+        return coordinates;
+    }
 
     public Item(int length, int height, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
         this.name = name;
@@ -34,6 +38,7 @@ public class Item {
     public int getX() {
         return coordinates.getX();
     }
+
     public int getY() {
         return coordinates.getY();
     }

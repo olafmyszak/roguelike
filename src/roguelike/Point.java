@@ -1,5 +1,6 @@
 package roguelike;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Point {
@@ -37,5 +38,27 @@ public class Point {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public boolean equals(Point point) {
+        return x == point.x && y == point.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+    public void nullCoordinates() {
+        x = -1;
+        y = -1;
     }
 }

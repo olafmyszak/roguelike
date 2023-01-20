@@ -20,11 +20,10 @@ public class GameEngine {
     }
 
     public void run(String command) {
-        player.move(command);
+        player.action(command);
         levels.get(currentLevel).run(player);
 
         GameCharacter currentActor = eventQueue.poll();
-
     }
 
     public void start() {
@@ -34,6 +33,4 @@ public class GameEngine {
         eventQueue.add(player);
         eventQueue.addAll(levels.get(0).getMonsterList());
     }
-
-
 }

@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PossibleItems {
+public class ItemFactory {
     private final List<Item> items;
     private final int length;
     private final int height;
+    private List<Point> usedCoordinates;
 
-    public PossibleItems(int length, int height) {
+    public ItemFactory(int length, int height) {
         this.length = length;
         this.height = height;
         items = new ArrayList<>();
@@ -61,7 +62,21 @@ public class PossibleItems {
         }
     }
 
-    public Item getRandom() {
-        return items.get(new Random().nextInt(items.size()));
+    public Item getRandomItem() {
+        Item item = items.get(new Random().nextInt(items.size()));
+
+        boolean flag = false;
+
+        while (!flag) {
+            for (Point usedCoordinate : usedCoordinates) {
+                if (item.getCoordinates().equals(usedCoordinate)) {
+                    item = items.get(new Random().nextInt(items.size()));
+                }
+                flag = true;
+            }
+        }
+        usedCoordinates.add(item.getCoordinates());
+
+        return item;
     }
 }

@@ -10,6 +10,7 @@ public class GameCharacter {
     protected BasicAttributes basicAttributes;
     protected int level;
     protected List<Ability> abilities;
+
     public GameCharacter(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
         this.coordinates = Point.randomPoint(1, 1, length - 1, height - 1);
         this.name = name;
@@ -37,7 +38,7 @@ public class GameCharacter {
         return description;
     }
 
-    private void move(String command) {
+    protected void move(String command) {
         command = command.toLowerCase();
         switch (command) {
             case "w" -> coordinates.setX(coordinates.getX() - 1);
@@ -47,14 +48,14 @@ public class GameCharacter {
         }
     }
 
-    private void attack(){
+    private void attack() {
 
     }
 
-    public void action(String command){
+    public void action(String command) {
         command = command.toLowerCase();
 
-        switch (command){
+        switch (command) {
             case "w", "a", "s", "d" -> move(command);
         }
     }
