@@ -2,7 +2,7 @@ package roguelike;
 
 public class Attribute {
     private final int base;
-    private final int current;
+    private int current;
 
     public Attribute(int base, int current) {
         this.base = base;
@@ -20,5 +20,9 @@ public class Attribute {
 
     public int getCurrent() {
         return current;
+    }
+
+    public void setCurrent(int value){
+        current = value;
     }
 }

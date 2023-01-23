@@ -62,10 +62,39 @@ public class DungeonMap {
             int x = monster.getX();
             int y = monster.getY();
 
+            if(!tiles[x][y].isAbleToMoveOnThisTile()){
+                monster.setCoordinates(x+1, y);
+            }
+
+            if(!tiles[x][y].isAbleToMoveOnThisTile()){
+                monster.setCoordinates(x-1, y);
+            }
+
+            if(!tiles[x][y].isAbleToMoveOnThisTile()){
+                monster.setCoordinates(x, y+1);
+            }
+
+            if(!tiles[x][y].isAbleToMoveOnThisTile()){
+                monster.setCoordinates(x, y-1);
+            }
+
             tiles[x][y] = new Tile(Symbols.MONSTER, monster.getName(), monster.getDescription());
         }
     }
 
+    public Tile[] getNeighbours(Point coordinates){
+        int x = coordinates.getX();
+        int y = coordinates.getY();
+
+        Tile[] result = new Tile[4];
+
+        result[0] = tiles[x+1][y];
+        result[1] = tiles[x-1][y];
+        result[2] = tiles[x][y+1];
+        result[3] = tiles[x-1][y-1];
+
+        return result;
+    }
     private void drawItems(List<Item> items) {
         for (Item item : items) {
             int x = item.getX();

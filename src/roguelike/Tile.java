@@ -12,7 +12,7 @@ public class Tile {
     }
 
     public boolean isAbleToMoveOnThisTile() {
-        return squareType.getCharacterSymbol().equals("-") || squareType.getCharacterSymbol().equals("&");
+        return squareType.getCharacterSymbol().equals("-") || squareType.getCharacterSymbol().equals("&") || squareType.getCharacterSymbol().equals("@");
     }
 
     public String getCharacterSymbol() {

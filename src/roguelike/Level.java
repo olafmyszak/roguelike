@@ -42,10 +42,22 @@ public class Level {
                     player.pickUpItem(item);
                     item.getCoordinates().nullCoordinates();
                 } else {
-                    System.out.printf("Inventory is full.");
+                    System.out.print("Inventory is full.");
                 }
             }
         }
+
+        for (GameCharacter monster : monsterList) {
+            Tile[] neighbours = dungeonMap.getNeighbours(monster.getCoordinates());
+
+            for (Tile neighbour : neighbours) {
+                if(neighbour.getCharacterSymbol().equals(Symbols.getCharacterSymbol(Symbols.PLAYER))){
+                    monster.attack(player);
+                }
+            }
+        }
+
+        System.out.println(player.basicAttributes.getHealthPoints().getCurrent());
     }
 
     private void generateMonsters(int currentLevel) {

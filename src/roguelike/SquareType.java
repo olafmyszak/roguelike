@@ -17,12 +17,6 @@ public class SquareType {
     }
 
     public String getCharacterSymbol() {
-        return switch (symbol) {
-            case WALL -> "#";
-            case FLOOR -> "-";
-            case PLAYER -> "@";
-            case MONSTER -> "?";
-            case ITEM -> "&";
-        };
+        return Symbols.getCharacterSymbol(symbol);
     }
 }

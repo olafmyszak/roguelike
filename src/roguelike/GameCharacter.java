@@ -48,8 +48,22 @@ public class GameCharacter {
         }
     }
 
-    private void attack() {
+    protected void attack(GameCharacter character) {
+        int damage = basicAttributes.getStrength().getCurrent() * level / 5;
 
+        character.takeDamage(damage);
+
+        System.out.println(character.basicAttributes.getHealthPoints().getCurrent());
+    }
+
+    private void takeDamage(int damage) {
+        int hp = basicAttributes.getHealthPoints().getCurrent();
+
+        if (damage >= hp) {
+            basicAttributes.setCurrentHealthPoints(0);
+        } else {
+            basicAttributes.setCurrentHealthPoints(hp - damage);
+        }
     }
 
     public void action(String command) {
@@ -59,6 +73,7 @@ public class GameCharacter {
             case "w", "a", "s", "d" -> move(command);
         }
     }
+
 
     public Point getCoordinates() {
         return coordinates;
@@ -76,4 +91,7 @@ public class GameCharacter {
         coordinates.setX(x);
         coordinates.setY(y);
     }
+
+
+
 }

@@ -57,20 +57,6 @@ public class MonsterFactory {
     }
 
     public GameCharacter getRandomMonster() {
-        GameCharacter monster = monsters.get(new Random().nextInt(monsters.size()));
-
-        boolean flag = false;
-
-        while (!flag) {
-            for (Point usedCoordinate : usedCoordinates) {
-                if (monster.getCoordinates().equals(usedCoordinate)) {
-                    monster = monsters.get(new Random().nextInt(monsters.size()));
-                }
-                flag = true;
-            }
-        }
-        usedCoordinates.add(monster.getCoordinates());
-
-        return monster;
+        return monsters.get(new Random().nextInt(monsters.size()));
     }
 }
