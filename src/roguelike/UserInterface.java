@@ -16,19 +16,20 @@ public class UserInterface {
         Scanner scanner = new Scanner(System.in);
 
         //playTitleScreen();
+        clearScreen();
 
         System.out.print("Enter the name of your hero: ");
-        String command = scanner.next();
+        String input = scanner.next();
 
-        GameEngine engine = new GameEngine(length, height, command);
+        GameEngine engine = new GameEngine(length, height, input);
 
         clearScreen();
         engine.start();
         do {
-            command = scanner.next();
+            input = scanner.next();
             clearScreen();
-            engine.run(command);
-        } while (!command.equalsIgnoreCase("q"));
+            engine.run(input);
+        } while (!input.equalsIgnoreCase("q"));
         clearScreen();
     }
 

@@ -7,7 +7,12 @@ public class GameCharacter {
     protected Point coordinates;
     protected String name;
     protected String description;
-    protected BasicAttributes basicAttributes;
+    protected Attribute healthPoints;
+    protected Attribute speed;
+    protected Attribute strength;
+    protected Attribute intelligence;
+    protected Attribute dexterity;
+    protected Attribute mana;
     protected int level;
     protected List<Ability> abilities;
 
@@ -15,20 +20,53 @@ public class GameCharacter {
         this.coordinates = Point.randomPoint(1, 1, length - 1, height - 1);
         this.name = name;
         this.description = description;
-        this.basicAttributes = new BasicAttributes(healthPoints, speed, strength, intelligence, dexterity, mana);
+        this.healthPoints = healthPoints;
+        this.speed = speed;
+        this.strength = strength;
+        this.intelligence = intelligence;
+        this.dexterity = dexterity;
+        this.mana = mana;
         this.level = level;
         this.abilities = new ArrayList<>();
+
     }
 
     public GameCharacter(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level, List<Ability> abilities) {
         this.coordinates = Point.randomPoint(1, 1, length - 1, height - 1);
         this.name = name;
         this.description = description;
-        this.basicAttributes = new BasicAttributes(healthPoints, speed, strength, intelligence, dexterity, mana);
+
         this.level = level;
         this.abilities = abilities;
     }
 
+    public Attribute getHealthPoints() {
+        return healthPoints;
+    }
+
+    public void setCurrentHealthPoints(int healthPoints) {
+        this.healthPoints.setCurrent(healthPoints);
+    }
+
+    public Attribute getSpeed() {
+        return speed;
+    }
+
+    public Attribute getStrength() {
+        return strength;
+    }
+
+    public Attribute getIntelligence() {
+        return intelligence;
+    }
+
+    public Attribute getDexterity() {
+        return dexterity;
+    }
+
+    public Attribute getMana() {
+        return mana;
+    }
 
     public String getName() {
         return name;
@@ -49,20 +87,18 @@ public class GameCharacter {
     }
 
     protected void attack(GameCharacter character) {
-        int damage = basicAttributes.getStrength().getCurrent() * level / 5;
+        int damage = strength.getCurrent() * level / 5;
 
         character.takeDamage(damage);
-
-        System.out.println(character.basicAttributes.getHealthPoints().getCurrent());
     }
 
     private void takeDamage(int damage) {
-        int hp = basicAttributes.getHealthPoints().getCurrent();
+        int hp = healthPoints.getCurrent();
 
         if (damage >= hp) {
-            basicAttributes.setCurrentHealthPoints(0);
+            setCurrentHealthPoints(0);
         } else {
-            basicAttributes.setCurrentHealthPoints(hp - damage);
+            setCurrentHealthPoints(hp - damage);
         }
     }
 
@@ -91,7 +127,4 @@ public class GameCharacter {
         coordinates.setX(x);
         coordinates.setY(y);
     }
-
-
-
 }

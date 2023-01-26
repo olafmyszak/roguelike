@@ -21,7 +21,7 @@ public class DungeonMap {
         return height;
     }
 
-    public void createGrid(Player player, List<GameCharacter> monsters, List<Item> items) {
+    public void createGrid(Player player, List<Monster> monsters, List<Item> items) {
         for (int cols = 0; cols < height; ++cols) {
             tiles[0][cols] = new Tile(Symbols.WALL, "Wall");
             tiles[length - 1][cols] = new Tile(Symbols.WALL, "Wall");
@@ -57,25 +57,23 @@ public class DungeonMap {
         tiles[x][y] = new Tile(Symbols.PLAYER, player.getName(), player.getDescription());
     }
 
-    private void drawMonster(List<GameCharacter> monsters) {
+    private void drawMonster(List<Monster> monsters) {
         for (GameCharacter monster : monsters) {
             int x = monster.getX();
             int y = monster.getY();
 
-            if(!tiles[x][y].isAbleToMoveOnThisTile()){
-                monster.setCoordinates(x+1, y);
-            }
+            if(!tiles[x][y].isAbleToMoveOnThisTile()) {
+                if (tiles[x + 1][y].isAbleToMoveOnThisTile()) {
+                    ++x;
+                } else if (tiles[x - 1][y].isAbleToMoveOnThisTile()) {
+                    --x;
+                } else if (!tiles[x][y + 1].isAbleToMoveOnThisTile()) {
+                    ++y;
+                } else if (!tiles[x][y - 1].isAbleToMoveOnThisTile()) {
+                    --y;
+                }
 
-            if(!tiles[x][y].isAbleToMoveOnThisTile()){
-                monster.setCoordinates(x-1, y);
-            }
-
-            if(!tiles[x][y].isAbleToMoveOnThisTile()){
-                monster.setCoordinates(x, y+1);
-            }
-
-            if(!tiles[x][y].isAbleToMoveOnThisTile()){
-                monster.setCoordinates(x, y-1);
+                monster.setCoordinates(x,y);
             }
 
             tiles[x][y] = new Tile(Symbols.MONSTER, monster.getName(), monster.getDescription());

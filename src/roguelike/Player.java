@@ -11,7 +11,7 @@ public class Player extends GameCharacter {
     }
 
     public Player(int length, int height, String name) {
-        super(length, height, name, "You. The hero.", new Attribute(30), new Attribute(10), new Attribute(5), new Attribute(5), new Attribute(5), new Attribute(20), 1);
+        super(length, height, name, "You. The hero.", new Attribute(30), new Attribute(2), new Attribute(5), new Attribute(5), new Attribute(5), new Attribute(20), 1);
         this.inventory = new Inventory();
     }
 

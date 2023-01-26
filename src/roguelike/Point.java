@@ -39,26 +39,29 @@ public class Point {
     public void setY(int y) {
         this.y = y;
     }
-
     public boolean equals(Point point) {
         return x == point.x && y == point.y;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
-    }
-
-    @Override
-    public String toString() {
-        return "Point{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
     }
 
     public void nullCoordinates() {
         x = -1;
         y = -1;
+    }
+
+    public boolean isNeighbour(Point point){
+        Point[] neighbours = new Point[4];
+
+        neighbours[0] = new Point(x+1, y);
+        neighbours[1] = new Point(x-1, y);
+        neighbours[2] = new Point(x, y+1);
+        neighbours[3] = new Point(x, y-1);
+
+        for (Point neighbour : neighbours) {
+            if(point.equals(neighbour)){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Level {
     private final DungeonMap dungeonMap;
-    private final List<GameCharacter> monsterList;
+    private final List<Monster> monsterList;
     private final List<Item> itemList;
     private final List<Point> itemCoordinates;
 
@@ -29,7 +29,6 @@ public class Level {
     }
 
     public void run(Player player) {
-        simplePathfinding(monsterList, player.getX(), player.getY());
         dungeonMap.createGrid(player, monsterList, itemList);
         dungeonMap.printGrid();
 
@@ -40,24 +39,12 @@ public class Level {
 
                 if (!player.getInventory().isFull()) {
                     player.pickUpItem(item);
-                    item.getCoordinates().nullCoordinates();
+                    itemList.remove(index);
                 } else {
                     System.out.print("Inventory is full.");
                 }
             }
         }
-
-        for (GameCharacter monster : monsterList) {
-            Tile[] neighbours = dungeonMap.getNeighbours(monster.getCoordinates());
-
-            for (Tile neighbour : neighbours) {
-                if(neighbour.getCharacterSymbol().equals(Symbols.getCharacterSymbol(Symbols.PLAYER))){
-                    monster.attack(player);
-                }
-            }
-        }
-
-        System.out.println(player.basicAttributes.getHealthPoints().getCurrent());
     }
 
     private void generateMonsters(int currentLevel) {
@@ -90,26 +77,8 @@ public class Level {
             itemList.add(itemFactory.getRandomItem());
         }
     }
-
-    public void simplePathfinding(List<GameCharacter> monsters, int playerX, int playerY) {
-        for (GameCharacter monster : monsters) {
-            Point monsterCoordinates = monster.getCoordinates();
-            int monsterX = monsterCoordinates.getX();
-            int monsterY = monsterCoordinates.getY();
-
-            if (monsterX > playerX) {
-                monster.action("w");
-            } else if (monsterX < playerX) {
-                monster.action("s");
-            } else if (monsterY > playerY) {
-                monster.action("a");
-            } else {
-                monster.action("d");
-            }
-        }
-    }
-
-    public List<GameCharacter> getMonsterList() {
+    
+    public List<Monster> getMonsterList() {
         return monsterList;
     }
 }
