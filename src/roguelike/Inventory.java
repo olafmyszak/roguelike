@@ -19,8 +19,13 @@ public class Inventory {
     }
 
     public void addItemToInventory(Item item) {
-        storage[currentSlotInStorage] = item;
-        ++currentSlotInStorage;
+        if(!isFull()) {
+            storage[currentSlotInStorage] = item;
+            ++currentSlotInStorage;
+        }
+        else {
+            System.out.println("Inventory is full!");
+        }
     }
 
     public boolean isFull() {

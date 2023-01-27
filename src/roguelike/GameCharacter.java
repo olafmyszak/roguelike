@@ -88,6 +88,7 @@ public class GameCharacter {
 
     protected void attack(GameCharacter character) {
         int damage = strength.getCurrent() * level / 5;
+        System.out.println(damage);
 
         character.takeDamage(damage);
     }
@@ -95,11 +96,13 @@ public class GameCharacter {
     private void takeDamage(int damage) {
         int hp = healthPoints.getCurrent();
 
+
         if (damage >= hp) {
             setCurrentHealthPoints(0);
         } else {
             setCurrentHealthPoints(hp - damage);
         }
+
     }
 
     public void action(String command) {

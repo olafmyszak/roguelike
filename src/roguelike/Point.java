@@ -43,11 +43,6 @@ public class Point {
         return x == point.x && y == point.y;
     }
 
-    public void nullCoordinates() {
-        x = -1;
-        y = -1;
-    }
-
     public boolean isNeighbour(Point point){
         Point[] neighbours = new Point[4];
 

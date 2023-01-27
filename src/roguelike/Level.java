@@ -37,12 +37,8 @@ public class Level {
                 int index = itemCoordinates.indexOf(itemCoordinate);
                 Item item = itemList.get(index);
 
-                if (!player.getInventory().isFull()) {
-                    player.pickUpItem(item);
-                    itemList.remove(index);
-                } else {
-                    System.out.print("Inventory is full.");
-                }
+                player.pickUpItem(item);
+                itemList.remove(index);
             }
         }
     }
@@ -54,8 +50,9 @@ public class Level {
         final int maxNumberOfMonsters = 3;
 
         int numberOfMonsters = new Random().nextInt(minNumberOfMonsters, maxNumberOfMonsters);
+        int monsterLevel = new Random().nextInt(currentLevel, currentLevel+2);
 
-        MonsterFactory monsterFactory = new MonsterFactory(maxLength, maxHeight, currentLevel);
+        MonsterFactory monsterFactory = new MonsterFactory(maxLength, maxHeight, monsterLevel);
 
         for (int i = 0; i < numberOfMonsters; ++i) {
             monsterList.add(monsterFactory.getRandomMonster());
@@ -77,7 +74,7 @@ public class Level {
             itemList.add(itemFactory.getRandomItem());
         }
     }
-    
+
     public List<Monster> getMonsterList() {
         return monsterList;
     }

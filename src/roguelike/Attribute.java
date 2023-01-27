@@ -1,7 +1,7 @@
 package roguelike;
 
 public class Attribute {
-    private final int base;
+    private int base;
     private int current;
 
     public Attribute(int base, int current) {

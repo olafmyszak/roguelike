@@ -28,6 +28,5 @@ public class Monster extends GameCharacter{
         } else {
             action("d");
         }
-        System.out.println("The " + getName() + " moves!");
     }
 }
