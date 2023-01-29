@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        UserInterface ui = new UserInterface(15,15);
+        UserInterface ui = new UserInterface();
 
         try {
             ui.run();

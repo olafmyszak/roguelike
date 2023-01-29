@@ -11,12 +11,12 @@ public class Item {
         return coordinates;
     }
 
-    public Item(int length, int height, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
+    public Item(Point coordinates, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
         this.name = name;
         this.description = description;
         this.goodSlots = goodSlots;
         this.basicAttributes = new BasicAttributes(healthPoints, speed, strength, intelligence, dexterity, mana);
-        this.coordinates = Point.randomPoint(1, 1, length - 1, height - 1);
+        this.coordinates = coordinates;
     }
 
     public String getName() {
@@ -25,14 +25,6 @@ public class Item {
 
     public String getDescription() {
         return description;
-    }
-
-    public Item(Point coordinates, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
-        this.name = name;
-        this.description = description;
-        this.goodSlots = goodSlots;
-        this.basicAttributes = new BasicAttributes(healthPoints, speed, strength, intelligence, dexterity, mana);
-        this.coordinates = coordinates;
     }
 
     public int getX() {

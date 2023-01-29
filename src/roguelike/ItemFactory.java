@@ -12,14 +12,11 @@ import java.util.Random;
 
 public class ItemFactory {
     private final List<Item> items;
-    private final int length;
-    private final int height;
-    private List<Point> usedCoordinates;
+    private List<Point> coordinates;
 
-    public ItemFactory(int length, int height) {
-        this.length = length;
-        this.height = height;
-        items = new ArrayList<>();
+    public ItemFactory(List<Point> coordinates) {
+        this.coordinates = coordinates;
+        this.items = new ArrayList<>();
         loadItems();
     }
 
@@ -53,7 +50,9 @@ public class ItemFactory {
                 PlayerSlots[] slots = new PlayerSlots[slotsList.size()];
                 slots = slotsList.toArray(slots);
 
-                items.add(new Item(length, height, name, description, slots, new Attribute(healthPoints), new Attribute(speed), new Attribute(strength), new Attribute(intelligence), new Attribute(dexterity), new Attribute(mana)));
+                Point point = coordinates.get(new Random().nextInt(coordinates.size()));
+
+                items.add(new Item(point, name, description, slots, new Attribute(healthPoints), new Attribute(speed), new Attribute(strength), new Attribute(intelligence), new Attribute(dexterity), new Attribute(mana)));
 
                 line = bufferedReader.readLine();
             }

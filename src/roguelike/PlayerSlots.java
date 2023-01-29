@@ -16,4 +16,6 @@ public enum PlayerSlots {
     public static int getSize() {
         return size;
     }
+
+
 }

@@ -4,13 +4,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class UserInterface {
-    private final int length;
-    private final int height;
-
-    public UserInterface(int length, int height) {
-        this.length = length;
-        this.height = height;
-    }
+    private final int length = 30;
+    private final int height = 30;
 
     public void run() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
@@ -21,10 +16,10 @@ public class UserInterface {
         System.out.print("Enter the name of your hero: ");
         String input = scanner.next();
 
-        GameEngine engine = new GameEngine(length, height, input);
+        GameEngine engine = new GameEngine(length, height);
 
         clearScreen();
-        engine.start();
+        engine.start(input);
         do {
             input = scanner.next();
             clearScreen();

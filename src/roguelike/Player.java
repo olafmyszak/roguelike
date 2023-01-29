@@ -5,13 +5,13 @@ public class Player extends GameCharacter {
     private int experience;
     private Inventory inventory;
 
-    public Player(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level, Inventory inventory) {
-        super(length, height, name, description, healthPoints, speed, strength, intelligence, dexterity, mana, level);
-        this.inventory = inventory;
-    }
+//    public Player(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level, Inventory inventory) {
+//        super(length, height, name, description, healthPoints, speed, strength, intelligence, dexterity, mana, level);
+//        this.inventory = inventory;
+//    }
 
-    public Player(int length, int height, String name) {
-        super(length, height, name, "You. The hero.", new Attribute(30), new Attribute(1), new Attribute(5), new Attribute(5), new Attribute(5), new Attribute(20), 1);
+    public Player(Point coordinates, String name) {
+        super(coordinates, name, "You. The hero.", new Attribute(30), new Attribute(1), new Attribute(5), new Attribute(5), new Attribute(5), new Attribute(20), 1);
         this.inventory = new Inventory();
     }
 

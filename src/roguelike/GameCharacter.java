@@ -16,8 +16,9 @@ public class GameCharacter {
     protected int level;
     protected List<Ability> abilities;
 
-    public GameCharacter(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
-        this.coordinates = Point.randomPoint(1, 1, length - 1, height - 1);
+    public GameCharacter(Point coordinates, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
+        //this.coordinates = Point.randomPoint(1, 1, length - 1, height - 1);
+        this.coordinates = coordinates;
         this.name = name;
         this.description = description;
         this.healthPoints = healthPoints;
@@ -95,7 +96,6 @@ public class GameCharacter {
 
     private void takeDamage(int damage) {
         int hp = healthPoints.getCurrent();
-
 
         if (damage >= hp) {
             setCurrentHealthPoints(0);

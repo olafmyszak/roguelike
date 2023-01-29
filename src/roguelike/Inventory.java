@@ -1,21 +1,18 @@
 package roguelike;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 public class Inventory {
-    private List<Item> wearableSlots;
+    private final EnumSet<PlayerSlots> wearableSlots;
     private final Item[] storage;
     private final int storageSize = 9;
     private int currentSlotInStorage = 0;
 
     public Inventory() {
-        this.wearableSlots = new ArrayList<>(PlayerSlots.getSize());
+        this.wearableSlots = EnumSet.allOf(PlayerSlots.class);
         this.storage = new Item[storageSize];
-    }
-
-    public List<Item> getWearableSlots() {
-        return wearableSlots;
     }
 
     public void addItemToInventory(Item item) {
@@ -28,7 +25,20 @@ public class Inventory {
         }
     }
 
+    public Item[] getStorage() {
+        return storage;
+    }
+
+    public void printInventory(){
+        System.out.print("||");
+        for (Item item : storage) {
+            if(item != null)
+                System.out.print("|&|");
+        }
+        System.out.println("||");
+    }
+
     public boolean isFull() {
-        return currentSlotInStorage == 9;
+        return currentSlotInStorage == storageSize;
     }
 }

@@ -1,6 +1,5 @@
 package roguelike;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class Point {
@@ -10,11 +9,6 @@ public class Point {
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    public Point() {
-        x = 0;
-        y = 0;
     }
 
     public static Point randomPoint(int xMin, int yMin, int xMax, int yMax) {

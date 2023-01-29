@@ -12,17 +12,13 @@ import java.util.Random;
 
 public class MonsterFactory {
     private final List<Monster> monsters;
-    private final int length;
-    private final int height;
+    private List<Point> coordinates;
     private final int level;
-    private List<Point> usedCoordinates;
 
-    public MonsterFactory(int length, int height, int level) {
-        this.length = length;
-        this.height = height;
+    public MonsterFactory(List<Point> coordinates, int level) {
+        this.coordinates = coordinates;
         this.level = level;
         this.monsters = new ArrayList<>();
-        this.usedCoordinates = new ArrayList<>();
         this.loadMonsters();
     }
 
@@ -46,7 +42,9 @@ public class MonsterFactory {
                 int dexterity = Integer.parseInt(values[6]);
                 int mana = Integer.parseInt(values[7]);
 
-                monsters.add(new Monster(length, height, name, description, new Attribute(healthPoints), new Attribute(speed), new Attribute(strength), new Attribute(intelligence), new Attribute(dexterity), new Attribute(mana), level));
+                Point point = coordinates.get(new Random().nextInt(coordinates.size()));
+
+                monsters.add(new Monster(point, name, description, new Attribute(healthPoints), new Attribute(speed), new Attribute(strength), new Attribute(intelligence), new Attribute(dexterity), new Attribute(mana), level));
 
                 line = bufferedReader.readLine();
             }

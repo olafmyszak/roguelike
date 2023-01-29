@@ -1,6 +1,7 @@
 package roguelike;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -9,6 +10,7 @@ public class Level {
     private final List<Monster> monsterList;
     private final List<Item> itemList;
     private final List<Point> itemCoordinates;
+    private List<Point> walkableTiles;
 
     public Level(DungeonMap dungeonMap, String name, String description) {
         this.dungeonMap = dungeonMap;
@@ -17,11 +19,17 @@ public class Level {
         this.itemCoordinates = new ArrayList<>();
     }
 
-    public void start(Player player, int currentLevel) {
+    public List<Point> getWalkableTiles() {
+        return walkableTiles;
+    }
+
+    public void start(int currentLevel) {
+        dungeonMap.createGrid();
         generateMonsters(currentLevel);
         generateItems();
-        dungeonMap.createGrid(player, monsterList, itemList);
-        dungeonMap.printGrid();
+        this.walkableTiles = dungeonMap.getWalkableTiles();
+//        player = new Player(walkableTiles.get(new Random().nextInt(walkableTiles.size())), name);
+        //dungeonMap.printGrid(player, monsterList, itemList);
 
         for (Item item : itemList) {
             itemCoordinates.add(item.getCoordinates());
@@ -29,30 +37,29 @@ public class Level {
     }
 
     public void run(Player player) {
-        dungeonMap.createGrid(player, monsterList, itemList);
-        dungeonMap.printGrid();
+        dungeonMap.printGrid(player, monsterList, itemList);
 
-        for (Point itemCoordinate : itemCoordinates) {
-            if (itemCoordinate.equals(player.coordinates)) {
-                int index = itemCoordinates.indexOf(itemCoordinate);
-                Item item = itemList.get(index);
+        for(Iterator<Point> pointIterator = itemCoordinates.iterator(); pointIterator.hasNext(); ){
+            Point next = pointIterator.next();
+            int index = itemCoordinates.indexOf(next);
+            Item item = itemList.get(index);
 
+            if(next.equals(player.coordinates)){
                 player.pickUpItem(item);
                 itemList.remove(index);
+                pointIterator.remove();
             }
         }
     }
 
     private void generateMonsters(int currentLevel) {
-        final int maxLength = dungeonMap.getLength();
-        final int maxHeight = dungeonMap.getHeight();
         final int minNumberOfMonsters = 1;
         final int maxNumberOfMonsters = 3;
 
         int numberOfMonsters = new Random().nextInt(minNumberOfMonsters, maxNumberOfMonsters);
         int monsterLevel = new Random().nextInt(currentLevel, currentLevel+2);
 
-        MonsterFactory monsterFactory = new MonsterFactory(maxLength, maxHeight, monsterLevel);
+        MonsterFactory monsterFactory = new MonsterFactory(dungeonMap.getWalkableTiles(), monsterLevel);
 
         for (int i = 0; i < numberOfMonsters; ++i) {
             monsterList.add(monsterFactory.getRandomMonster());
@@ -60,10 +67,7 @@ public class Level {
     }
 
     private void generateItems() {
-        final int maxLength = dungeonMap.getLength();
-        final int maxHeight = dungeonMap.getHeight();
-
-        ItemFactory itemFactory = new ItemFactory(maxLength, maxHeight);
+        ItemFactory itemFactory = new ItemFactory(dungeonMap.getWalkableTiles());
 
         int percent = new Random().nextInt(0, 100);
 
