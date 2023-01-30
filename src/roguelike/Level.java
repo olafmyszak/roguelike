@@ -39,12 +39,12 @@ public class Level {
     public void run(Player player) {
         dungeonMap.printGrid(player, monsterList, itemList);
 
-        for(Iterator<Point> pointIterator = itemCoordinates.iterator(); pointIterator.hasNext(); ){
+        for (Iterator<Point> pointIterator = itemCoordinates.iterator(); pointIterator.hasNext(); ) {
             Point next = pointIterator.next();
             int index = itemCoordinates.indexOf(next);
             Item item = itemList.get(index);
 
-            if(next.equals(player.coordinates)){
+            if (next.equals(player.coordinates)) {
                 player.pickUpItem(item);
                 itemList.remove(index);
                 pointIterator.remove();
@@ -57,7 +57,7 @@ public class Level {
         final int maxNumberOfMonsters = 3;
 
         int numberOfMonsters = new Random().nextInt(minNumberOfMonsters, maxNumberOfMonsters);
-        int monsterLevel = new Random().nextInt(currentLevel, currentLevel+2);
+        int monsterLevel = new Random().nextInt(currentLevel, currentLevel + 2);
 
         MonsterFactory monsterFactory = new MonsterFactory(dungeonMap.getWalkableTiles(), monsterLevel);
 

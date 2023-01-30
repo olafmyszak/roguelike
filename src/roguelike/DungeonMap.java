@@ -16,7 +16,7 @@ public class DungeonMap {
     public DungeonMap(int length, int height) {
         this.length = length;
         this.height = height;
-        this.tiles = new Tile[length][height];
+        this.tiles = new Tile[height][length];
         this.numberOfWalls = length * height;
         this.walkableTiles = new ArrayList<>();
         this.originalGrid = new Tile[length][height];

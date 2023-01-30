@@ -1,14 +1,11 @@
 package roguelike;
 
+import javax.swing.*;
+
 public class Player extends GameCharacter {
+    private final Inventory inventory;
     private String previousCommand;
     private int experience;
-    private Inventory inventory;
-
-//    public Player(int length, int height, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level, Inventory inventory) {
-//        super(length, height, name, description, healthPoints, speed, strength, intelligence, dexterity, mana, level);
-//        this.inventory = inventory;
-//    }
 
     public Player(Point coordinates, String name) {
         super(coordinates, name, "You. The hero.", new Attribute(30), new Attribute(1), new Attribute(5), new Attribute(5), new Attribute(5), new Attribute(20), 1);
@@ -17,8 +14,13 @@ public class Player extends GameCharacter {
 
     @Override
     public void action(String command) {
-        previousCommand = command;
-        super.action(command);
+        if (command.toLowerCase().matches("drop+\\s\\d+")) {
+            int index = Integer.parseInt(command.replaceAll("[^0-9]", ""));
+            inventory.dropItem(index);
+        } else {
+            previousCommand = command;
+            super.action(command);
+        }
     }
 
     public void pickUpItem(Item item) {
@@ -36,5 +38,9 @@ public class Player extends GameCharacter {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public void printStats(){
+        System.out.printf("HP: %d SPD: %d STR: %d INT: %d DXT: %d MAN: %d\n", healthPoints.getCurrent(), speed.getCurrent(), strength.getCurrent(), intelligence.getCurrent(), dexterity.getCurrent(), mana.getCurrent());
     }
 }

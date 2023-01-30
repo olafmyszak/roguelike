@@ -4,7 +4,12 @@ public class Item {
     private final String name;
     private final String description;
     private final PlayerSlots[] goodSlots;
-    private final BasicAttributes basicAttributes;
+    private Attribute healthPoints;
+    private Attribute speed;
+    private Attribute strength;
+    private Attribute intelligence;
+    private Attribute dexterity;
+    private Attribute mana;
     private Point coordinates;
 
     public Point getCoordinates() {
@@ -15,7 +20,12 @@ public class Item {
         this.name = name;
         this.description = description;
         this.goodSlots = goodSlots;
-        this.basicAttributes = new BasicAttributes(healthPoints, speed, strength, intelligence, dexterity, mana);
+        this.healthPoints = healthPoints;
+        this.speed = speed;
+        this.strength = strength;
+        this.intelligence = intelligence;
+        this.dexterity = dexterity;
+        this.mana = mana;
         this.coordinates = coordinates;
     }
 

@@ -62,7 +62,7 @@ public class ItemFactory {
     }
 
     public Item getRandomItem() {
-       return items.get(new Random().nextInt(items.size()));
+        return items.get(new Random().nextInt(items.size()));
 
     }
 }

@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class UserInterface {
-    private final int length = 30;
-    private final int height = 30;
-
+    private final String[] legalCommands = new String[]{"w", "a", "s", "d", "drop \\d"};
     public void run() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
 
@@ -14,17 +12,33 @@ public class UserInterface {
         clearScreen();
 
         System.out.print("Enter the name of your hero: ");
-        String input = scanner.next();
+        String input = scanner.nextLine();
 
+        int length = 30;
+        int height = 30;
         GameEngine engine = new GameEngine(length, height);
 
         clearScreen();
         engine.start(input);
+
         do {
-            input = scanner.next();
+            input = scanner.nextLine().toLowerCase();
+
+            while (!checkIfCommandIsLegal(input)){
+                System.out.println("No such command!");
+                input = scanner.nextLine().toLowerCase();
+            }
+
             clearScreen();
-            engine.run(input);
-        } while (!input.equalsIgnoreCase("q"));
+            Code code = engine.run(input);
+
+            if (code == Code.GAME_OVER) {
+                clearScreen();
+                System.out.println("Game over!");
+                return;
+            }
+
+        } while (!input.equals("q"));
         clearScreen();
     }
 
@@ -41,6 +55,10 @@ public class UserInterface {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private boolean checkIfCommandIsLegal(String command){
+        return command.equals("w") || command.equals("a") || command.equals("s") || command.equals("d") || command.matches("drop+\\s\\d+" ) || command.equals("q");
     }
 
     private void playTitleScreen() throws InterruptedException {

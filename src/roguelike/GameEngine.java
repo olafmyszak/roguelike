@@ -9,9 +9,9 @@ public class GameEngine {
     private final int height;
 
     private final int currentLevel = 1;
-    private  Player player;
+    private Player player;
     private final ArrayList<Level> levels;
-    private PriorityQueue<GameCharacter> eventQueue;
+    private final PriorityQueue<GameCharacter> eventQueue;
 
     public GameEngine(int length, int height) {
         this.length = length;
@@ -23,14 +23,13 @@ public class GameEngine {
 
     }
 
-    public void run(String command) {
+    public Code run(String command) {
         //player.action(command);
 
         PriorityQueue<GameCharacter> tempQueue = new PriorityQueue<>((a, b) -> b.speed.getCurrent() - a.speed.getCurrent());
 
         while (!eventQueue.isEmpty()) {
             GameCharacter currentActor = eventQueue.poll();
-
 
             for (int i = 0; i < currentActor.speed.getCurrent(); ++i) {
                 if (currentActor.getClass() == Monster.class) {
@@ -40,13 +39,22 @@ public class GameEngine {
                 }
             }
 
-            tempQueue.add(currentActor);
+            if (player.getState() == State.DEAD) {
+                return Code.GAME_OVER;
+            }
+
+            if (currentActor.getState() != State.DEAD) {
+                tempQueue.add(currentActor);
+            }
         }
 
         eventQueue.addAll(tempQueue);
 
-        levels.get(currentLevel-1).run(player);
+        levels.get(currentLevel - 1).run(player);
         player.getInventory().printInventory();
+        player.printStats();
+
+        return Code.RUNNING;
     }
 
     private void handleMonster(Monster monster) {
@@ -62,7 +70,7 @@ public class GameEngine {
 
     public void start(String name) {
         levels.add(new Level(new DungeonMap(length, height), "name", "desc"));
-        levels.get(0).start( 1);
+        levels.get(0).start(1);
 
         Point point = levels.get(0).getWalkableTiles().get(new Random().nextInt(levels.get(0).getWalkableTiles().size()));
         player = new Player(point, name);
@@ -71,5 +79,7 @@ public class GameEngine {
         eventQueue.addAll(levels.get(0).getMonsterList());
 
         levels.get(0).run(player);
+        player.getInventory().printInventory();
+        player.printStats();
     }
 }

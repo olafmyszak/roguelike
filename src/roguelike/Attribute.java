@@ -22,7 +22,7 @@ public class Attribute {
         return current;
     }
 
-    public void setCurrent(int value){
+    public void setCurrent(int value) {
         current = value;
     }
 }
