@@ -8,7 +8,7 @@ public class GameCharacter {
     protected String name;
     protected String description;
     protected Attribute healthPoints;
-    protected Attribute speed;
+    protected double speed;
     protected Attribute strength;
     protected Attribute intelligence;
     protected Attribute dexterity;
@@ -17,7 +17,7 @@ public class GameCharacter {
     protected List<Ability> abilities;
     protected State state;
 
-    public GameCharacter(Point coordinates, String name, String description, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
+    public GameCharacter(Point coordinates, String name, String description, Attribute healthPoints, double speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
         this.coordinates = coordinates;
         this.name = name;
         this.description = description;
@@ -40,7 +40,7 @@ public class GameCharacter {
         this.healthPoints.setCurrent(healthPoints);
     }
 
-    public Attribute getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 

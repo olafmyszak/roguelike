@@ -36,7 +36,7 @@ public class MonsterFactory {
                 String name = values[0];
                 String description = values[1];
                 int healthPoints = Integer.parseInt(values[2]);
-                int speed = Integer.parseInt(values[3]);
+                double speed = Double.parseDouble(values[3]);
                 int strength = Integer.parseInt(values[4]);
                 int intelligence = Integer.parseInt(values[5]);
                 int dexterity = Integer.parseInt(values[6]);
@@ -44,7 +44,7 @@ public class MonsterFactory {
 
                 Point point = coordinates.get(new Random().nextInt(coordinates.size()));
 
-                monsters.add(new Monster(point, name, description, new Attribute(healthPoints), new Attribute(speed), new Attribute(strength), new Attribute(intelligence), new Attribute(dexterity), new Attribute(mana), level));
+                monsters.add(new Monster(point, name, description, new Attribute(healthPoints), speed, new Attribute(strength), new Attribute(intelligence), new Attribute(dexterity), new Attribute(mana), level));
 
                 line = bufferedReader.readLine();
             }

@@ -1,17 +1,15 @@
 package roguelike;
 
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Random;
+import java.util.*;
 
 public class GameEngine {
     private final int length;
     private final int height;
 
     private final int currentLevel = 1;
-    private Player player;
     private final ArrayList<Level> levels;
     private final PriorityQueue<GameCharacter> eventQueue;
+    private Player player;
 
     public GameEngine(int length, int height) {
         this.length = length;
@@ -19,23 +17,66 @@ public class GameEngine {
 
         this.levels = new ArrayList<>();
 
-        this.eventQueue = new PriorityQueue<>((a, b) -> b.speed.getCurrent() - a.speed.getCurrent());
+        this.eventQueue = new PriorityQueue<>(Comparator.comparingDouble(a -> a.speed));
 
     }
 
     public Code run(String command) {
-        //player.action(command);
-
-        PriorityQueue<GameCharacter> tempQueue = new PriorityQueue<>((a, b) -> b.speed.getCurrent() - a.speed.getCurrent());
+        PriorityQueue<GameCharacter> tempQueue = new PriorityQueue<>(Comparator.comparingDouble(a -> a.speed));
 
         while (!eventQueue.isEmpty()) {
             GameCharacter currentActor = eventQueue.poll();
 
-            for (int i = 0; i < currentActor.speed.getCurrent(); ++i) {
+            int turns = (int) currentActor.speed;
+
+            if (turns == 0) {
+                turns = 1;
+            }
+
+            for (int i = 0; i < turns; ++i) {
                 if (currentActor.getClass() == Monster.class) {
                     handleMonster((Monster) currentActor);
                 } else {
-                    currentActor.action(command);
+                    switch (command) {
+                        case "i" -> {
+                            List<Monster> monsterList = levels.get(currentLevel - 1).getMonsterList();
+
+                            for (Monster monster : monsterList) {
+                                if (player.coordinates.isUp(monster.coordinates)) {
+                                    player.attack(monster);
+                                }
+                            }
+                        }
+                        case "j" -> {
+                            List<Monster> monsterList = levels.get(currentLevel - 1).getMonsterList();
+
+                            for (Monster monster : monsterList) {
+                                if (player.coordinates.isLeft(monster.coordinates)) {
+                                    player.attack(monster);
+                                }
+                            }
+                        }
+                        case "k" -> {
+                            List<Monster> monsterList = levels.get(currentLevel - 1).getMonsterList();
+
+                            for (Monster monster : monsterList) {
+                                if (player.coordinates.isDown(monster.coordinates)) {
+                                    player.attack(monster);
+                                }
+                            }
+                        }
+                        case "l" -> {
+                            List<Monster> monsterList = levels.get(currentLevel - 1).getMonsterList();
+
+                            for (Monster monster : monsterList) {
+                                if (player.coordinates.isRight(monster.coordinates)) {
+                                    player.attack(monster);
+                                }
+                            }
+                        }
+
+                        default -> player.action(command);
+                    }
                 }
             }
 
@@ -43,7 +84,10 @@ public class GameEngine {
                 return Code.GAME_OVER;
             }
 
-            if (currentActor.getState() != State.DEAD) {
+            if (currentActor.getState() == State.DEAD) {
+                levels.get(currentLevel-1).removeMonster((Monster) currentActor);
+            }
+            else {
                 tempQueue.add(currentActor);
             }
         }

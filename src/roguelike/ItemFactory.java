@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class ItemFactory {
     private final List<Item> items;
-    private List<Point> coordinates;
+    private final List<Point> coordinates;
 
     public ItemFactory(List<Point> coordinates) {
         this.coordinates = coordinates;
@@ -33,7 +33,7 @@ public class ItemFactory {
                 String name = values[0];
                 String description = values[1];
                 int healthPoints = Integer.parseInt(values[2]);
-                int speed = Integer.parseInt(values[3]);
+                double speed = Double.parseDouble(values[3]);
                 int strength = Integer.parseInt(values[4]);
                 int intelligence = Integer.parseInt(values[5]);
                 int dexterity = Integer.parseInt(values[6]);
@@ -52,7 +52,7 @@ public class ItemFactory {
 
                 Point point = coordinates.get(new Random().nextInt(coordinates.size()));
 
-                items.add(new Item(point, name, description, slots, new Attribute(healthPoints), new Attribute(speed), new Attribute(strength), new Attribute(intelligence), new Attribute(dexterity), new Attribute(mana)));
+                items.add(new Item(point, name, description, slots, new Attribute(healthPoints), speed, new Attribute(strength), new Attribute(intelligence), new Attribute(dexterity), new Attribute(mana)));
 
                 line = bufferedReader.readLine();
             }

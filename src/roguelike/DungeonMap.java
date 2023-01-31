@@ -139,13 +139,16 @@ public class DungeonMap {
         drawItems(items);
         drawMonster(monsters);
         drawPlayer(player);
+        StringBuilder stringBuilder = new StringBuilder(2 * length * height+length);
 
         for (int i = 0; i < length; ++i) {
             for (int j = 0; j < height; ++j) {
-                System.out.print(tiles[i][j].getCharacterSymbol() + " ");
+                stringBuilder.append(tiles[i][j].getCharacterSymbol()).append(" ");
             }
-            System.out.println();
+            stringBuilder.append("\n");
         }
+
+        System.out.print(stringBuilder);
 
         clearActorsAndProps();
     }

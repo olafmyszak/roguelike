@@ -22,12 +22,12 @@ public class Point {
         return x;
     }
 
-    public int getY() {
-        return y;
-    }
-
     public void setX(int x) {
         this.x = x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void setY(int y) {
@@ -53,5 +53,33 @@ public class Point {
         }
 
         return false;
+    }
+
+    public boolean isUp(Point point) {
+        int x = point.x + 1;
+        int y = point.y;
+
+        return this.x == x && this.y == y;
+    }
+
+    public boolean isDown(Point point) {
+        int x = point.x - 1;
+        int y = point.y;
+
+        return this.x == x && this.y == y;
+    }
+
+    public boolean isLeft(Point point) {
+        int x = point.x;
+        int y = point.y + 1;
+
+        return this.x == x && this.y == y;
+    }
+
+    public boolean isRight(Point point) {
+        int x = point.x;
+        int y = point.y - 1;
+
+        return this.x == x && this.y == y;
     }
 }

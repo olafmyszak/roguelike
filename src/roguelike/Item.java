@@ -5,7 +5,7 @@ public class Item {
     private final String description;
     private final PlayerSlots[] goodSlots;
     private Attribute healthPoints;
-    private Attribute speed;
+    private double speed;
     private Attribute strength;
     private Attribute intelligence;
     private Attribute dexterity;
@@ -16,7 +16,7 @@ public class Item {
         return coordinates;
     }
 
-    public Item(Point coordinates, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, Attribute speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
+    public Item(Point coordinates, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, double speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
         this.name = name;
         this.description = description;
         this.goodSlots = goodSlots;

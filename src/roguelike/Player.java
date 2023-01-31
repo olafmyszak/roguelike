@@ -1,27 +1,27 @@
 package roguelike;
 
-import javax.swing.*;
-
 public class Player extends GameCharacter {
     private final Inventory inventory;
     private String previousCommand;
     private int experience;
 
     public Player(Point coordinates, String name) {
-        super(coordinates, name, "You. The hero.", new Attribute(30), new Attribute(1), new Attribute(5), new Attribute(5), new Attribute(5), new Attribute(20), 1);
+        super(coordinates, name, "You. The hero.", new Attribute(30), 1, new Attribute(5), new Attribute(5), new Attribute(5), new Attribute(20), 1);
         this.inventory = new Inventory();
     }
 
     @Override
     public void action(String command) {
-        if (command.toLowerCase().matches("drop+\\s\\d+")) {
+        if (command.matches("drop+\\s\\d+")) {
             int index = Integer.parseInt(command.replaceAll("[^0-9]", ""));
             inventory.dropItem(index);
         } else {
+
             previousCommand = command;
             super.action(command);
         }
     }
+
 
     public void pickUpItem(Item item) {
         inventory.addItemToInventory(item);
@@ -40,7 +40,8 @@ public class Player extends GameCharacter {
         return inventory;
     }
 
-    public void printStats(){
-        System.out.printf("HP: %d SPD: %d STR: %d INT: %d DXT: %d MAN: %d\n", healthPoints.getCurrent(), speed.getCurrent(), strength.getCurrent(), intelligence.getCurrent(), dexterity.getCurrent(), mana.getCurrent());
+    public void printStats() {
+        String speed = String.format(String.valueOf(this.speed)).replaceAll("\\.0+$", ""); //gets rid of trailing zeroes
+        System.out.printf("HP: %d SPD: %s STR: %d INT: %d DXT: %d MAN: %d\n", healthPoints.getCurrent(), speed, strength.getCurrent(), intelligence.getCurrent(), dexterity.getCurrent(), mana.getCurrent());
     }
 }

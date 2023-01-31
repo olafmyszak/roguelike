@@ -82,4 +82,8 @@ public class Level {
     public List<Monster> getMonsterList() {
         return monsterList;
     }
+
+    public void removeMonster(Monster monster){
+        monsterList.remove(monster);
+    }
 }

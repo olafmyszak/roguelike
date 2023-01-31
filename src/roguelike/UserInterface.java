@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class UserInterface {
-    private final String[] legalCommands = new String[]{"w", "a", "s", "d", "drop \\d"};
     public void run() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
 
@@ -58,7 +57,8 @@ public class UserInterface {
     }
 
     private boolean checkIfCommandIsLegal(String command){
-        return command.equals("w") || command.equals("a") || command.equals("s") || command.equals("d") || command.matches("drop+\\s\\d+" ) || command.equals("q");
+        return command.equals("w") || command.equals("a") || command.equals("s") || command.equals("d") || command.matches("drop+\\s\\d+" ) || command.equals("q") ||
+                command.equals("i") || command.equals("j") || command.equals("k") || command.equals("l");
     }
 
     private void playTitleScreen() throws InterruptedException {
