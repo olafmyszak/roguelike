@@ -15,7 +15,7 @@ Przedmioty
 -miecz\
 -buty
 -tarcza\
--pierścień\
+-pierścień
 
 Grafika: ASCII w terminalu
 
