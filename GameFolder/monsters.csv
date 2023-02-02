@@ -1,0 +1,4 @@
+Name;Desc;HP;Speed;Damage;Mana;C9
+Vampire;Powerful undead Count, feasting on the blood of humans. Faster and more intelligent than any normal human.;15;2;10;40;
+Zombie;Rotten corpse, now alive again. Can't really think with its decayed brain though. Slow but strong.;10;1;5;0;
+Ghost;Restless soul, stuck in the mortal realm. Cannot be harmed by standard attacks and weapons.;5;2;5;40;
