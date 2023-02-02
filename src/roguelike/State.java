@@ -2,5 +2,6 @@ package roguelike;
 
 public enum State {
     ALIVE,
-    DEAD
+    DEAD,
+    BOSS_DEAD
 }

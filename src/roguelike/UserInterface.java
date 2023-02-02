@@ -31,9 +31,16 @@ public class UserInterface {
             clearScreen();
             Code code = engine.run(input);
 
+
             if (code == Code.GAME_OVER) {
                 clearScreen();
                 System.out.println("Game over!");
+                return;
+            }
+
+            if(code == Code.GAME_WON){
+                clearScreen();
+                System.out.println("Congratulations! You win!");
                 return;
             }
 

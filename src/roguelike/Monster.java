@@ -6,6 +6,7 @@ public class Monster extends GameCharacter {
         super(coordinates, name, description, healthPoints, speed, strength, mana, level);
     }
 
+    protected Monster(){}
     public void moveTowardsPlayer(Point playerCoordinates) {
         int x = getX();
         int y = getY();

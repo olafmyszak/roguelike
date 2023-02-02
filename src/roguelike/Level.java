@@ -11,27 +11,37 @@ public class Level {
     private final List<Item> itemList;
     private final List<Point> itemCoordinates;
     private List<Point> walkableTiles;
+    private int currentLevel;
 
-    public Level(DungeonMap dungeonMap, String name, String description) {
+    public Level(DungeonMap dungeonMap, int currentLevel) {
         this.dungeonMap = dungeonMap;
         this.monsterList = new ArrayList<>();
         this.itemList = new ArrayList<>();
         this.itemCoordinates = new ArrayList<>();
+        this.currentLevel = currentLevel;
     }
 
     public List<Point> getWalkableTiles() {
         return walkableTiles;
     }
 
-    public void start(int currentLevel) {
+    public void start() {
         dungeonMap.createGrid();
-        //generateMonsters(currentLevel);
+        generateMonsters();
         generateItems();
         this.walkableTiles = dungeonMap.getWalkableTiles();
 
         for (Item item : itemList) {
             itemCoordinates.add(item.getCoordinates());
         }
+
+       if(currentLevel >= 10){
+            double random = Math.random();
+
+           if(random < 0.2) {
+                spawnBoss();
+            }
+       }
     }
 
     public Code run(Player player) {
@@ -58,14 +68,21 @@ public class Level {
         return Code.RUNNING;
     }
 
-    private void generateMonsters(int currentLevel) {
+    private void generateMonsters() {
         int numberOfMonsters = new Random().nextInt(2, 7);
         int monsterLevel = new Random().nextInt(currentLevel, currentLevel + 2);
 
         MonsterFactory monsterFactory = new MonsterFactory(dungeonMap.getWalkableTiles(), monsterLevel);
 
         for (int i = 0; i < numberOfMonsters; ++i) {
-            monsterList.add(monsterFactory.getRandomMonster());
+            Monster monster = monsterFactory.getRandomMonster();
+            System.out.println(monster.coordinates);
+            monsterList.add(monster);
+        }
+        System.out.println();
+
+        for (Monster monster : monsterList) {
+            System.out.println(monster.coordinates);
         }
     }
 
@@ -80,6 +97,10 @@ public class Level {
             itemList.add(itemFactory.getRandomItem());
             itemList.add(itemFactory.getRandomItem());
         }
+    }
+
+    private void spawnBoss(){
+        monsterList.add(new Boss(walkableTiles.get(new Random().nextInt(walkableTiles.size()))));
     }
 
     public List<Monster> getMonsterList() {

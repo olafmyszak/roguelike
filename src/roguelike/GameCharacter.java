@@ -26,6 +26,8 @@ public class GameCharacter {
         this.state = State.ALIVE;
     }
 
+    protected GameCharacter(){}
+
     public Attribute getHealthPoints() {
         return healthPoints;
     }
@@ -102,5 +104,9 @@ public class GameCharacter {
     public void setCoordinates(int x, int y) {
         coordinates.setX(x);
         coordinates.setY(y);
+    }
+
+    public void setCoordinates(Point point){
+        coordinates = point;
     }
 }

@@ -7,7 +7,7 @@ public class Player extends GameCharacter {
     private int manaRegen;
 
     public Player(Point coordinates, String name, int manaRegen) {
-        super(coordinates, name, "You. The hero.", new Attribute(30), 1, 10, new Attribute(20), 1);
+        super(coordinates, name, "You. The hero.", new Attribute(1000), 1, 10000, new Attribute(20), 1);
         this.inventory = new Inventory();
         this.manaRegen = manaRegen;
     }
@@ -37,7 +37,8 @@ public class Player extends GameCharacter {
     }
 
     private void removeItemStats(Item item){
-        mana.setCurrent(mana.getCurrent() - item.getMana().getCurrent());
+        mana.setBase(mana.getBase() + item.getMana().getCurrent());
+        mana.setCurrent(mana.getBase());
         damage -= item.getDamage();
         speed -= item.getSpeed();
         healthPoints.setCurrent(healthPoints.getCurrent() - item.getHealthPoints().getCurrent());

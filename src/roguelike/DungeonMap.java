@@ -108,7 +108,15 @@ public class DungeonMap {
                 monster.setCoordinates(x, y);
             }
 
-            tiles[x][y] = new Tile(Symbols.MONSTER, monster.getName(), monster.getDescription());
+            //tiles[x][y] = new Tile(Symbols.MONSTER, monster.getName(), monster.getDescription());
+
+            switch (monster.getName()){
+                case "Zombie" -> tiles[x][y] = new Tile(Symbols.ZOMBIE, monster.getName(), monster.getDescription());
+                case "Vampire" -> tiles[x][y] = new Tile(Symbols.VAMPIRE, monster.getName(), monster.getDescription());
+                case "Ghost" -> tiles[x][y] = new Tile(Symbols.GHOST, monster.getName(), monster.getDescription());
+                case "Boss" -> tiles[x][y] = new Tile(Symbols.BOSS, monster.getName(), monster.getDescription());
+            }
+
             walkableTiles.remove(new Point(x,y));
         }
     }

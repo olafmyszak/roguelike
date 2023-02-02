@@ -3,13 +3,13 @@ package roguelike;
 import java.util.EnumSet;
 
 public class Inventory {
-    private final EnumSet<PlayerSlots> wearableSlots;
+    //private final EnumSet<PlayerSlots> wearableSlots;
     private final Item[] storage;
     private final int storageSize = 9;
     private int currentSlotInStorage = 0;
 
     public Inventory() {
-        this.wearableSlots = EnumSet.allOf(PlayerSlots.class);
+        //this.wearableSlots = EnumSet.allOf(PlayerSlots.class);
         this.storage = new Item[storageSize];
     }
 
@@ -35,14 +35,21 @@ public class Inventory {
     }
 
     public void printInventory() {
-        System.out.print("|");
-        for (Item item : storage) {
-            if (item != null)
-                System.out.print("&|");
+        if(!isEmpty()) {
+            System.out.print("|");
+            for (Item item : storage) {
+                if (item != null)
+                    System.out.print("&|");
+            }
+            System.out.println();
         }
     }
 
     public boolean isFull() {
         return currentSlotInStorage == storageSize;
+    }
+
+    public boolean isEmpty(){
+        return currentSlotInStorage == 0;
     }
 }

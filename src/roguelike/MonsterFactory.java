@@ -40,9 +40,11 @@ public class MonsterFactory {
                 int damage = Integer.parseInt(values[4]);
                 int mana = Integer.parseInt(values[5]);
 
-                Point point = coordinates.get(new Random().nextInt(coordinates.size()));
+               // int random = new Random().nextInt(coordinates.size());
+                //Point point = coordinates.get(random);
+               // System.out.println(random);
 
-                monsters.add(new Monster(point, name, description, new Attribute(healthPoints), speed, damage, new Attribute(mana), level));
+                monsters.add(new Monster(null, name, description, new Attribute(healthPoints), speed, damage, new Attribute(mana), level));
 
                 line = bufferedReader.readLine();
             }
@@ -53,6 +55,11 @@ public class MonsterFactory {
     }
 
     public Monster getRandomMonster() {
-        return monsters.get(new Random().nextInt(monsters.size()));
+        Point point = coordinates.get(new Random().nextInt(coordinates.size()));
+        Monster monster = monsters.get(new Random().nextInt(monsters.size()));
+        monster.setCoordinates(point);
+        //System.out.println(point);
+
+        return monster;
     }
 }

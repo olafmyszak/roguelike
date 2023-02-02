@@ -11,11 +11,11 @@ public enum PlayerSlots {
     RIGHT_FINGER,
     CAPE;
 
-    private static final int size = PlayerSlots.values().length;
+    //private static final int size = PlayerSlots.values().length;
 
-    public static int getSize() {
-        return size;
-    }
+    //public static int getSize() {
+        //return size;
+    //  }
 
 
 }

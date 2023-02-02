@@ -25,4 +25,8 @@ public class Attribute {
     public void setCurrent(int value) {
         current = value;
     }
+
+    public void setBase(int base) {
+        this.base = base;
+    }
 }
