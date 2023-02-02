@@ -4,11 +4,6 @@ public class Attribute {
     private int base;
     private int current;
 
-    public Attribute(int base, int current) {
-        this.base = base;
-        this.current = current;
-    }
-
     public Attribute(int base) {
         this.base = base;
         this.current = base;
@@ -18,15 +13,15 @@ public class Attribute {
         return base;
     }
 
+    public void setBase(int base) {
+        this.base = base;
+    }
+
     public int getCurrent() {
         return current;
     }
 
     public void setCurrent(int value) {
         current = value;
-    }
-
-    public void setBase(int base) {
-        this.base = base;
     }
 }

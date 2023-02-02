@@ -2,11 +2,17 @@ package roguelike;
 
 public class Monster extends GameCharacter {
 
-    public Monster(Point coordinates, String name, String description, Attribute healthPoints, double speed, int strength, Attribute mana, int level) {
-        super(coordinates, name, description, healthPoints, speed, strength, mana, level);
+    public Monster(Point coordinates, String name, String description, Attribute healthPoints, double speed, int damage, Attribute mana, int level) {
+        super(coordinates, name, description, healthPoints, speed, damage, mana, level);
     }
 
-    protected Monster(){}
+    protected Monster() {
+    }
+
+    public Monster(Monster monster) {
+        super(monster.coordinates, monster.name, monster.description, monster.healthPoints, monster.speed, monster.damage, monster.mana, monster.level);
+    }
+
     public void moveTowardsPlayer(Point playerCoordinates) {
         int x = getX();
         int y = getY();

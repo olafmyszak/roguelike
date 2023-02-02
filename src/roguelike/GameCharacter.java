@@ -1,8 +1,5 @@
 package roguelike;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GameCharacter {
     protected Point coordinates;
     protected String name;
@@ -26,22 +23,15 @@ public class GameCharacter {
         this.state = State.ALIVE;
     }
 
-    protected GameCharacter(){}
+    protected GameCharacter() {
+    }
 
-    public Attribute getHealthPoints() {
-        return healthPoints;
+    public int getLevel() {
+        return level;
     }
 
     public void setCurrentHealthPoints(int healthPoints) {
         this.healthPoints.setCurrent(healthPoints);
-    }
-
-    public double getSpeed() {
-        return speed;
-    }
-
-    public Attribute getMana() {
-        return mana;
     }
 
     public String getName() {
@@ -93,6 +83,10 @@ public class GameCharacter {
         return coordinates;
     }
 
+    public void setCoordinates(Point point) {
+        coordinates = point;
+    }
+
     public int getX() {
         return coordinates.getX();
     }
@@ -104,9 +98,5 @@ public class GameCharacter {
     public void setCoordinates(int x, int y) {
         coordinates.setX(x);
         coordinates.setY(y);
-    }
-
-    public void setCoordinates(Point point){
-        coordinates = point;
     }
 }

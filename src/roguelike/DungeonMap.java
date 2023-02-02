@@ -38,6 +38,7 @@ public class DungeonMap {
             percentOfWalls = numberOfWalls * 100 / height * length;
         }
 
+
         spawnDoor();
 
         copyGrid();
@@ -50,16 +51,16 @@ public class DungeonMap {
     }
 
     private void drawInitialGrid() {
-        for(int i=0; i<height; ++i){
-            tiles[i][0] = tiles[i][length-1] = new Tile(Symbols.UNBREAKABLE_WALL, "Unbreakable wall");
+        for (int i = 0; i < height; ++i) {
+            tiles[i][0] = tiles[i][length - 1] = new Tile(Symbols.UNBREAKABLE_WALL, "Unbreakable wall");
         }
 
-        for (int j=0; j<length; ++j){
-            tiles[0][j] = tiles[height-1][j] = new Tile(Symbols.UNBREAKABLE_WALL, "Unbreakable wall");
+        for (int j = 0; j < length; ++j) {
+            tiles[0][j] = tiles[height - 1][j] = new Tile(Symbols.UNBREAKABLE_WALL, "Unbreakable wall");
         }
 
-        for (int i = 1; i < height-1; ++i) {
-            for (int j = 1; j < length-1; ++j) {
+        for (int i = 1; i < height - 1; ++i) {
+            for (int j = 1; j < length - 1; ++j) {
                 tiles[i][j] = new Tile(Symbols.WALL, "Wall");
             }
         }
@@ -110,29 +111,15 @@ public class DungeonMap {
 
             //tiles[x][y] = new Tile(Symbols.MONSTER, monster.getName(), monster.getDescription());
 
-            switch (monster.getName()){
+            switch (monster.getName()) {
                 case "Zombie" -> tiles[x][y] = new Tile(Symbols.ZOMBIE, monster.getName(), monster.getDescription());
                 case "Vampire" -> tiles[x][y] = new Tile(Symbols.VAMPIRE, monster.getName(), monster.getDescription());
                 case "Ghost" -> tiles[x][y] = new Tile(Symbols.GHOST, monster.getName(), monster.getDescription());
                 case "Boss" -> tiles[x][y] = new Tile(Symbols.BOSS, monster.getName(), monster.getDescription());
             }
 
-            walkableTiles.remove(new Point(x,y));
+            walkableTiles.remove(new Point(x, y));
         }
-    }
-
-    public Tile[] getNeighbours(Point coordinates) {
-        int x = coordinates.getX();
-        int y = coordinates.getY();
-
-        Tile[] result = new Tile[4];
-
-        result[0] = tiles[x + 1][y];
-        result[1] = tiles[x - 1][y];
-        result[2] = tiles[x][y + 1];
-        result[3] = tiles[x - 1][y - 1];
-
-        return result;
     }
 
     private void drawItems(List<Item> items) {
@@ -150,7 +137,7 @@ public class DungeonMap {
         drawItems(items);
         drawMonster(monsters);
         drawPlayer(player);
-        StringBuilder stringBuilder = new StringBuilder(2 * length * height+length);
+        StringBuilder stringBuilder = new StringBuilder(2 * length * height + length);
 
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < length; ++j) {
@@ -164,11 +151,11 @@ public class DungeonMap {
         clearActorsAndProps();
     }
 
-    public Tile getTile(Point point){
+    public Tile getTile(Point point) {
         return tiles[point.getX()][point.getY()];
     }
 
-    public void floorAWall(Point point){
+    public void floorAWall(Point point) {
         tiles[point.getX()][point.getY()] = new Tile(Symbols.FLOOR, "Floor");
         originalGrid[point.getX()][point.getY()] = new Tile(Symbols.FLOOR, "Floor");
     }

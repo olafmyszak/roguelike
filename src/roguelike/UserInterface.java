@@ -23,7 +23,7 @@ public class UserInterface {
         do {
             input = scanner.nextLine().toLowerCase();
 
-            while (!checkIfCommandIsLegal(input)){
+            while (!checkIfCommandIsLegal(input)) {
                 System.out.println("No such command!");
                 input = scanner.nextLine().toLowerCase();
             }
@@ -31,20 +31,19 @@ public class UserInterface {
             clearScreen();
             Code code = engine.run(input);
 
-
             if (code == Code.GAME_OVER) {
                 clearScreen();
-                System.out.println("Game over!");
+                System.out.println("Game over!\nFinal score: " + engine.getFinalScore());
                 return;
             }
 
-            if(code == Code.GAME_WON){
+            if (code == Code.GAME_WON) {
                 clearScreen();
-                System.out.println("Congratulations! You win!");
+                System.out.println("Congratulations! You win!\nFinal score: " + engine.getFinalScore());
                 return;
             }
 
-            if(code == Code.NEXT_LEVEL){
+            if (code == Code.NEXT_LEVEL) {
                 clearScreen();
                 engine.run(input);
             }
@@ -68,8 +67,8 @@ public class UserInterface {
         }
     }
 
-    private boolean checkIfCommandIsLegal(String command){
-        return command.equals("w") || command.equals("a") || command.equals("s") || command.equals("d") || command.matches("drop+\\s\\d+" ) || command.equals("q") ||
+    private boolean checkIfCommandIsLegal(String command) {
+        return command.equals("w") || command.equals("a") || command.equals("s") || command.equals("d") || command.matches("drop+\\s\\d+") || command.equals("q") ||
                 command.equals("i") || command.equals("j") || command.equals("k") || command.equals("l") || command.matches("break (left|right|up|down)");
     }
 }

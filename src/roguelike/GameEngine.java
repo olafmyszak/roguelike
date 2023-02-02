@@ -10,18 +10,20 @@ public class GameEngine {
     private int currentLevel = 1;
     private Player player;
 
+
     public GameEngine(int length, int height) {
         this.maxLength = length;
         this.maxHeight = height;
         this.levels = new ArrayList<>();
         this.eventQueue = new PriorityQueue<>(Comparator.comparingDouble(a -> a.speed));
-    }
 
+    }
 
 
     public Code run(String command) {
         PriorityQueue<GameCharacter> tempQueue = new PriorityQueue<>(Comparator.comparingDouble(a -> a.speed));
-        Boss boss;
+
+        System.out.println("Current dungeon level: " + currentLevel);
 
         while (!eventQueue.isEmpty()) {
             GameCharacter currentActor = eventQueue.poll();
@@ -37,12 +39,16 @@ public class GameEngine {
                 return Code.GAME_OVER;
             }
 
-            if(currentActor.getState() == State.BOSS_DEAD){
+            if (currentActor.getState() == State.BOSS_DEAD) {
+                player.setScore(player.getScore() + 100);
                 return Code.GAME_WON;
             }
 
             if (currentActor.getState() == State.DEAD) {
+                assert currentActor instanceof Monster;
                 levels.get(currentLevel - 1).removeMonster((Monster) currentActor);
+                player.setScore(player.getScore() + 50);
+                player.gainExperience(20);
             } else {
                 tempQueue.add(currentActor);
             }
@@ -70,9 +76,13 @@ public class GameEngine {
         player.getInventory().printInventory();
         player.printStats();
         player.regenerateMana();
-        System.out.println("Current level: " + currentLevel);
+        System.out.println("Character level: " + player.getLevel() + "           EXP: " + player.progressBar());
 
         return code;
+    }
+
+    public int getFinalScore() {
+        return player.getScore();
     }
 
     public void playerTurn(String command) {
@@ -140,6 +150,8 @@ public class GameEngine {
 
             default -> player.action(command);
         }
+
+        player.checkLevelUp();
     }
 
     private void handleMonster(Monster monster) {
@@ -154,6 +166,8 @@ public class GameEngine {
     }
 
     public void start(String name) {
+        System.out.println("Current dungeon level: " + currentLevel);
+
         int length = new Random().nextInt(20, maxLength);
         int height = new Random().nextInt(20, maxHeight);
         levels.add(new Level(new DungeonMap(length, height), currentLevel));
@@ -168,6 +182,6 @@ public class GameEngine {
         levels.get(currentLevel - 1).run(player);
         player.getInventory().printInventory();
         player.printStats();
-        System.out.println("Current level: " + currentLevel);
+        System.out.println("Character level: " + player.getLevel() + "           EXP: " + player.progressBar());
     }
 }

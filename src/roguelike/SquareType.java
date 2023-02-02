@@ -2,7 +2,7 @@ package roguelike;
 
 public class SquareType {
     private final Symbols symbol;
-    private String name;
+    private final String name;
     private String description;
 
     public SquareType(Symbols symbol, String name, String description) {
@@ -20,7 +20,15 @@ public class SquareType {
         return Symbols.getCharacterSymbol(symbol);
     }
 
-    public Symbols getSymbol(){
+    public Symbols getSymbol() {
         return symbol;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

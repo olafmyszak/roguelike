@@ -18,7 +18,6 @@ public enum Symbols {
             case WALL, UNBREAKABLE_WALL -> "#";
             case FLOOR -> "-";
             case PLAYER -> "@";
-
             case ITEM -> "&";
             case DOOR -> "+";
             case BOSS -> "B";

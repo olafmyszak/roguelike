@@ -19,7 +19,7 @@ public class Tile {
         return squareType.getCharacterSymbol();
     }
 
-    public Symbols getSymbol(){
+    public Symbols getSymbol() {
         return squareType.getSymbol();
     }
 

@@ -22,6 +22,7 @@ public class MonsterFactory {
         this.loadMonsters();
     }
 
+
     private void loadMonsters() {
         Path path = Paths.get("monsters.csv");
 
@@ -40,10 +41,6 @@ public class MonsterFactory {
                 int damage = Integer.parseInt(values[4]);
                 int mana = Integer.parseInt(values[5]);
 
-               // int random = new Random().nextInt(coordinates.size());
-                //Point point = coordinates.get(random);
-               // System.out.println(random);
-
                 monsters.add(new Monster(null, name, description, new Attribute(healthPoints), speed, damage, new Attribute(mana), level));
 
                 line = bufferedReader.readLine();
@@ -56,9 +53,8 @@ public class MonsterFactory {
 
     public Monster getRandomMonster() {
         Point point = coordinates.get(new Random().nextInt(coordinates.size()));
-        Monster monster = monsters.get(new Random().nextInt(monsters.size()));
+        Monster monster = new Monster(monsters.get(new Random().nextInt(monsters.size())));
         monster.setCoordinates(point);
-        //System.out.println(point);
 
         return monster;
     }

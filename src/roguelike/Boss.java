@@ -1,7 +1,7 @@
 package roguelike;
 
-public class Boss extends Monster{
-    public Boss(Point coordinates){
+public class Boss extends Monster {
+    public Boss(Point coordinates) {
         this.coordinates = coordinates;
         this.name = "Boss";
         this.healthPoints = new Attribute(40);
@@ -12,8 +12,8 @@ public class Boss extends Monster{
         this.state = State.ALIVE;
     }
 
-    public State getState(){
-        if(state == State.DEAD){
+    public State getState() {
+        if (state == State.DEAD) {
             return State.BOSS_DEAD;
         }
 

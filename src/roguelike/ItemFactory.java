@@ -37,20 +37,7 @@ public class ItemFactory {
                 int damage = Integer.parseInt(values[4]);
                 int mana = Integer.parseInt(values[5]);
 
-                //String[] slotsAsString = values[6].split(",");
-
-                //List<PlayerSlots> slotsList = new ArrayList<>();
-
-//                for (String s : slotsAsString) {
-//                    slotsList.add(PlayerSlots.valueOf(s));
-//                }
-
-                //PlayerSlots[] slots = new PlayerSlots[slotsList.size()];
-               // slots = slotsList.toArray(slots);
-
-                Point point = coordinates.get(new Random().nextInt(coordinates.size()));
-
-                items.add(new Item(point, name, description, new Attribute(healthPoints), speed, damage, new Attribute(mana)));
+                items.add(new Item(null, name, description, new Attribute(healthPoints), speed, damage, new Attribute(mana)));
 
                 line = bufferedReader.readLine();
             }
@@ -60,7 +47,10 @@ public class ItemFactory {
     }
 
     public Item getRandomItem() {
-        return items.get(new Random().nextInt(items.size()));
+        Point point = coordinates.get(new Random().nextInt(coordinates.size()));
+        Item item = new Item(items.get(new Random().nextInt(items.size())));
+        item.setCoordinates(point);
 
+        return item;
     }
 }

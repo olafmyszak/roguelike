@@ -10,8 +10,8 @@ public class Level {
     private final List<Monster> monsterList;
     private final List<Item> itemList;
     private final List<Point> itemCoordinates;
+    private final int currentLevel;
     private List<Point> walkableTiles;
-    private int currentLevel;
 
     public Level(DungeonMap dungeonMap, int currentLevel) {
         this.dungeonMap = dungeonMap;
@@ -27,21 +27,27 @@ public class Level {
 
     public void start() {
         dungeonMap.createGrid();
-        generateMonsters();
-        generateItems();
-        this.walkableTiles = dungeonMap.getWalkableTiles();
+        walkableTiles = dungeonMap.getWalkableTiles();
+        boolean bossIsSpawned = false;
 
-        for (Item item : itemList) {
-            itemCoordinates.add(item.getCoordinates());
-        }
 
-       if(currentLevel >= 10){
+        if (currentLevel >= 10) {
             double random = Math.random();
 
-           if(random < 0.2) {
+            if (random < 0.35) {
                 spawnBoss();
+                bossIsSpawned = true;
             }
-       }
+        }
+
+        if (!bossIsSpawned) {
+            generateMonsters();
+            generateItems();
+
+            for (Item item : itemList) {
+                itemCoordinates.add(item.getCoordinates());
+            }
+        }
     }
 
     public Code run(Player player) {
@@ -61,7 +67,7 @@ public class Level {
             }
         }
 
-        if(dungeonMap.getTile(playerCoordinates).getSymbol() == Symbols.DOOR){
+        if (dungeonMap.getTile(playerCoordinates).getSymbol() == Symbols.DOOR) {
             return Code.NEXT_LEVEL;
         }
 
@@ -69,20 +75,14 @@ public class Level {
     }
 
     private void generateMonsters() {
-        int numberOfMonsters = new Random().nextInt(2, 7);
+        int numberOfMonsters = (int) (walkableTiles.size() * 0.005);
         int monsterLevel = new Random().nextInt(currentLevel, currentLevel + 2);
 
-        MonsterFactory monsterFactory = new MonsterFactory(dungeonMap.getWalkableTiles(), monsterLevel);
+        MonsterFactory monsterFactory = new MonsterFactory(walkableTiles, monsterLevel);
 
         for (int i = 0; i < numberOfMonsters; ++i) {
             Monster monster = monsterFactory.getRandomMonster();
-            System.out.println(monster.coordinates);
             monsterList.add(monster);
-        }
-        System.out.println();
-
-        for (Monster monster : monsterList) {
-            System.out.println(monster.coordinates);
         }
     }
 
@@ -99,7 +99,7 @@ public class Level {
         }
     }
 
-    private void spawnBoss(){
+    private void spawnBoss() {
         monsterList.add(new Boss(walkableTiles.get(new Random().nextInt(walkableTiles.size()))));
     }
 
@@ -107,7 +107,7 @@ public class Level {
         return monsterList;
     }
 
-    public void removeMonster(Monster monster){
+    public void removeMonster(Monster monster) {
         monsterList.remove(monster);
     }
 
