@@ -25,38 +25,41 @@ public class Level {
 
     public void start(int currentLevel) {
         dungeonMap.createGrid();
-        generateMonsters(currentLevel);
+        //generateMonsters(currentLevel);
         generateItems();
         this.walkableTiles = dungeonMap.getWalkableTiles();
-//        player = new Player(walkableTiles.get(new Random().nextInt(walkableTiles.size())), name);
-        //dungeonMap.printGrid(player, monsterList, itemList);
 
         for (Item item : itemList) {
             itemCoordinates.add(item.getCoordinates());
         }
     }
 
-    public void run(Player player) {
+    public Code run(Player player) {
         dungeonMap.printGrid(player, monsterList, itemList);
+
+        Point playerCoordinates = player.getCoordinates();
 
         for (Iterator<Point> pointIterator = itemCoordinates.iterator(); pointIterator.hasNext(); ) {
             Point next = pointIterator.next();
             int index = itemCoordinates.indexOf(next);
             Item item = itemList.get(index);
 
-            if (next.equals(player.coordinates)) {
+            if (next.equals(playerCoordinates)) {
                 player.pickUpItem(item);
                 itemList.remove(index);
                 pointIterator.remove();
             }
         }
+
+        if(dungeonMap.getTile(playerCoordinates).getSymbol() == Symbols.DOOR){
+            return Code.NEXT_LEVEL;
+        }
+
+        return Code.RUNNING;
     }
 
     private void generateMonsters(int currentLevel) {
-        final int minNumberOfMonsters = 1;
-        final int maxNumberOfMonsters = 3;
-
-        int numberOfMonsters = new Random().nextInt(minNumberOfMonsters, maxNumberOfMonsters);
+        int numberOfMonsters = new Random().nextInt(2, 7);
         int monsterLevel = new Random().nextInt(currentLevel, currentLevel + 2);
 
         MonsterFactory monsterFactory = new MonsterFactory(dungeonMap.getWalkableTiles(), monsterLevel);
@@ -85,5 +88,9 @@ public class Level {
 
     public void removeMonster(Monster monster){
         monsterList.remove(monster);
+    }
+
+    public DungeonMap getDungeonMap() {
+        return dungeonMap;
     }
 }

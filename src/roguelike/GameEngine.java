@@ -3,17 +3,16 @@ package roguelike;
 import java.util.*;
 
 public class GameEngine {
-    private final int length;
-    private final int height;
-
-    private final int currentLevel = 1;
+    private final int maxLength;
+    private final int maxHeight;
     private final ArrayList<Level> levels;
     private final PriorityQueue<GameCharacter> eventQueue;
+    private int currentLevel = 1;
     private Player player;
 
     public GameEngine(int length, int height) {
-        this.length = length;
-        this.height = height;
+        this.maxLength = length;
+        this.maxHeight = height;
 
         this.levels = new ArrayList<>();
 
@@ -74,6 +73,30 @@ public class GameEngine {
                                 }
                             }
                         }
+                        case "break left" -> {
+                            if (levels.get(currentLevel - 1).getDungeonMap().getTile(player.coordinates.left()).getSymbol() == Symbols.WALL) {
+                                player.breakWAll();
+                                levels.get(currentLevel - 1).getDungeonMap().floorAWall(player.coordinates.left());
+                            }
+                        }
+                        case "break up" -> {
+                            if (levels.get(currentLevel - 1).getDungeonMap().getTile(player.coordinates.up()).getSymbol() == Symbols.WALL) {
+                                player.breakWAll();
+                                levels.get(currentLevel - 1).getDungeonMap().floorAWall(player.coordinates.up());
+                            }
+                        }
+                        case "break down" -> {
+                            if (levels.get(currentLevel - 1).getDungeonMap().getTile(player.coordinates.down()).getSymbol() == Symbols.WALL) {
+                                player.breakWAll();
+                                levels.get(currentLevel - 1).getDungeonMap().floorAWall(player.coordinates.down());
+                            }
+                        }
+                        case "break right" -> {
+                            if (levels.get(currentLevel - 1).getDungeonMap().getTile(player.coordinates.right()).getSymbol() == Symbols.WALL) {
+                                player.breakWAll();
+                                levels.get(currentLevel - 1).getDungeonMap().floorAWall(player.coordinates.right());
+                            }
+                        }
 
                         default -> player.action(command);
                     }
@@ -85,20 +108,36 @@ public class GameEngine {
             }
 
             if (currentActor.getState() == State.DEAD) {
-                levels.get(currentLevel-1).removeMonster((Monster) currentActor);
-            }
-            else {
+                levels.get(currentLevel - 1).removeMonster((Monster) currentActor);
+            } else {
                 tempQueue.add(currentActor);
             }
         }
 
         eventQueue.addAll(tempQueue);
 
-        levels.get(currentLevel - 1).run(player);
+        Code code = levels.get(currentLevel - 1).run(player);
+
+        if (code == Code.NEXT_LEVEL) {
+            ++currentLevel;
+            int length = new Random().nextInt(20, maxLength);
+            int height = new Random().nextInt(20, maxHeight);
+
+            levels.add(new Level(new DungeonMap(length, height), "name", "desc"));
+            levels.get(currentLevel - 1).start(currentLevel);
+
+            Point point = levels.get(currentLevel - 1).getWalkableTiles().get(new Random().nextInt(levels.get(currentLevel - 1).getWalkableTiles().size()));
+            player.setCoordinates(point.getX(), point.getY());
+
+            eventQueue.addAll(levels.get(currentLevel - 1).getMonsterList());
+            levels.get(currentLevel - 1).run(player);
+        }
+
         player.getInventory().printInventory();
         player.printStats();
+        player.regenerateMana();
 
-        return Code.RUNNING;
+        return code;
     }
 
     private void handleMonster(Monster monster) {
@@ -113,16 +152,18 @@ public class GameEngine {
     }
 
     public void start(String name) {
+        int length = new Random().nextInt(20, maxLength);
+        int height = new Random().nextInt(20, maxHeight);
         levels.add(new Level(new DungeonMap(length, height), "name", "desc"));
-        levels.get(0).start(1);
+        levels.get(currentLevel - 1).start(currentLevel);
 
-        Point point = levels.get(0).getWalkableTiles().get(new Random().nextInt(levels.get(0).getWalkableTiles().size()));
-        player = new Player(point, name);
+        Point point = levels.get(currentLevel - 1).getWalkableTiles().get(new Random().nextInt(levels.get(currentLevel - 1).getWalkableTiles().size()));
+        player = new Player(point, name, 5);
 
         eventQueue.add(player);
-        eventQueue.addAll(levels.get(0).getMonsterList());
+        eventQueue.addAll(levels.get(currentLevel - 1).getMonsterList());
 
-        levels.get(0).run(player);
+        levels.get(currentLevel - 1).run(player);
         player.getInventory().printInventory();
         player.printStats();
     }

@@ -9,26 +9,20 @@ public class GameCharacter {
     protected String description;
     protected Attribute healthPoints;
     protected double speed;
-    protected Attribute strength;
-    protected Attribute intelligence;
-    protected Attribute dexterity;
+    protected int damage;
     protected Attribute mana;
     protected int level;
-    protected List<Ability> abilities;
     protected State state;
 
-    public GameCharacter(Point coordinates, String name, String description, Attribute healthPoints, double speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana, int level) {
+    public GameCharacter(Point coordinates, String name, String description, Attribute healthPoints, double speed, int damage, Attribute mana, int level) {
         this.coordinates = coordinates;
         this.name = name;
         this.description = description;
         this.healthPoints = healthPoints;
         this.speed = speed;
-        this.strength = strength;
-        this.intelligence = intelligence;
-        this.dexterity = dexterity;
+        this.damage = damage;
         this.mana = mana;
         this.level = level;
-        this.abilities = new ArrayList<>();
         this.state = State.ALIVE;
     }
 
@@ -42,18 +36,6 @@ public class GameCharacter {
 
     public double getSpeed() {
         return speed;
-    }
-
-    public Attribute getStrength() {
-        return strength;
-    }
-
-    public Attribute getIntelligence() {
-        return intelligence;
-    }
-
-    public Attribute getDexterity() {
-        return dexterity;
     }
 
     public Attribute getMana() {
@@ -79,8 +61,6 @@ public class GameCharacter {
     }
 
     protected void attack(GameCharacter character) {
-        int damage = strength.getCurrent() * level / 5;
-
         character.takeDamage(damage);
     }
 
@@ -97,7 +77,6 @@ public class GameCharacter {
         } else {
             setCurrentHealthPoints(hp - damage);
         }
-
     }
 
     public void action(String command) {
@@ -107,7 +86,6 @@ public class GameCharacter {
             case "w", "a", "s", "d" -> move(command);
         }
     }
-
 
     public Point getCoordinates() {
         return coordinates;

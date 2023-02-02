@@ -2,5 +2,8 @@ package roguelike;
 
 public enum Code {
     GAME_OVER,
-    RUNNING
+    RUNNING,
+    NEXT_LEVEL
+
+
 }

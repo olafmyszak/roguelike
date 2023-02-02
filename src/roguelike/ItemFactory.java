@@ -34,12 +34,10 @@ public class ItemFactory {
                 String description = values[1];
                 int healthPoints = Integer.parseInt(values[2]);
                 double speed = Double.parseDouble(values[3]);
-                int strength = Integer.parseInt(values[4]);
-                int intelligence = Integer.parseInt(values[5]);
-                int dexterity = Integer.parseInt(values[6]);
-                int mana = Integer.parseInt(values[7]);
+                int damage = Integer.parseInt(values[4]);
+                int mana = Integer.parseInt(values[5]);
 
-                String[] slotsAsString = values[8].split(",");
+                String[] slotsAsString = values[6].split(",");
 
                 List<PlayerSlots> slotsList = new ArrayList<>();
 
@@ -52,7 +50,7 @@ public class ItemFactory {
 
                 Point point = coordinates.get(new Random().nextInt(coordinates.size()));
 
-                items.add(new Item(point, name, description, slots, new Attribute(healthPoints), speed, new Attribute(strength), new Attribute(intelligence), new Attribute(dexterity), new Attribute(mana)));
+                items.add(new Item(point, name, description, slots, new Attribute(healthPoints), speed, damage, new Attribute(mana)));
 
                 line = bufferedReader.readLine();
             }

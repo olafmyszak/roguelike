@@ -82,4 +82,28 @@ public class Point {
 
         return this.x == x && this.y == y;
     }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+    public Point left(){
+        return new Point(x, y-1);
+    }
+
+    public Point right(){
+        return new Point(x, y+1);
+    }
+
+    public Point up(){
+        return new Point(x-1, y);
+    }
+
+    public Point down(){
+        return new Point(x+1, y);
+    }
 }

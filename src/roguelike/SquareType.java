@@ -19,4 +19,8 @@ public class SquareType {
     public String getCharacterSymbol() {
         return Symbols.getCharacterSymbol(symbol);
     }
+
+    public Symbols getSymbol(){
+        return symbol;
+    }
 }

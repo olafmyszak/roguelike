@@ -6,25 +6,31 @@ public class Item {
     private final PlayerSlots[] goodSlots;
     private Attribute healthPoints;
     private double speed;
-    private Attribute strength;
-    private Attribute intelligence;
-    private Attribute dexterity;
+    private int damage;
     private Attribute mana;
     private Point coordinates;
+
+    public Item(Item item) {
+        this.name = item.name;
+        this.description = item.description;
+        this.goodSlots = item.goodSlots;
+        this.healthPoints = item.healthPoints;
+        this.speed = item.speed;
+        this.damage = item.damage;
+        this.mana = item.mana;
+    }
 
     public Point getCoordinates() {
         return coordinates;
     }
 
-    public Item(Point coordinates, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, double speed, Attribute strength, Attribute intelligence, Attribute dexterity, Attribute mana) {
+    public Item(Point coordinates, String name, String description, PlayerSlots[] goodSlots, Attribute healthPoints, double speed, int damage, Attribute mana) {
         this.name = name;
         this.description = description;
         this.goodSlots = goodSlots;
         this.healthPoints = healthPoints;
         this.speed = speed;
-        this.strength = strength;
-        this.intelligence = intelligence;
-        this.dexterity = dexterity;
+        this.damage = damage;
         this.mana = mana;
         this.coordinates = coordinates;
     }
@@ -43,5 +49,21 @@ public class Item {
 
     public int getY() {
         return coordinates.getY();
+    }
+
+    public Attribute getHealthPoints() {
+        return healthPoints;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public Attribute getMana() {
+        return mana;
     }
 }

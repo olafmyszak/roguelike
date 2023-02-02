@@ -19,15 +19,7 @@ public class DungeonMap {
         this.tiles = new Tile[height][length];
         this.numberOfWalls = length * height;
         this.walkableTiles = new ArrayList<>();
-        this.originalGrid = new Tile[length][height];
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public int getHeight() {
-        return height;
+        this.originalGrid = new Tile[height][length];
     }
 
     public void createGrid() {
@@ -46,26 +38,36 @@ public class DungeonMap {
             percentOfWalls = numberOfWalls * 100 / height * length;
         }
 
+        spawnDoor();
+
         copyGrid();
     }
 
     private void copyGrid() {
-        for (int i = 0; i < length; ++i) {
-            if (height >= 0) System.arraycopy(tiles[i], 0, originalGrid[i], 0, height);
+        for (int i = 0; i < height; ++i) {
+            if (length >= 0) System.arraycopy(tiles[i], 0, originalGrid[i], 0, length);
         }
     }
 
     private void drawInitialGrid() {
-        for (int i = 0; i < length; ++i) {
-            for (int j = 0; j < height; ++j) {
+        for(int i=0; i<height; ++i){
+            tiles[i][0] = tiles[i][length-1] = new Tile(Symbols.UNBREAKABLE_WALL, "Unbreakable wall");
+        }
+
+        for (int j=0; j<length; ++j){
+            tiles[0][j] = tiles[height-1][j] = new Tile(Symbols.UNBREAKABLE_WALL, "Unbreakable wall");
+        }
+
+        for (int i = 1; i < height-1; ++i) {
+            for (int j = 1; j < length-1; ++j) {
                 tiles[i][j] = new Tile(Symbols.WALL, "Wall");
             }
         }
     }
 
     private void drawRectangle(int x, int y, int length, int height) {
-        for (int i = x; i < length + x && i < this.length - 1; ++i) {
-            for (int j = y; j < height + y && j < this.height - 1; ++j) {
+        for (int i = x; i < height + x && i < this.height - 1; ++i) {
+            for (int j = y; j < length + y && j < this.length - 1; ++j) {
                 tiles[i][j] = new Tile(Symbols.FLOOR, "Floor");
                 --numberOfWalls;
                 walkableTiles.add(new Point(i, j));
@@ -107,6 +109,7 @@ public class DungeonMap {
             }
 
             tiles[x][y] = new Tile(Symbols.MONSTER, monster.getName(), monster.getDescription());
+            walkableTiles.remove(new Point(x,y));
         }
     }
 
@@ -141,8 +144,8 @@ public class DungeonMap {
         drawPlayer(player);
         StringBuilder stringBuilder = new StringBuilder(2 * length * height+length);
 
-        for (int i = 0; i < length; ++i) {
-            for (int j = 0; j < height; ++j) {
+        for (int i = 0; i < height; ++i) {
+            for (int j = 0; j < length; ++j) {
                 stringBuilder.append(tiles[i][j].getCharacterSymbol()).append(" ");
             }
             stringBuilder.append("\n");
@@ -153,17 +156,28 @@ public class DungeonMap {
         clearActorsAndProps();
     }
 
+    public Tile getTile(Point point){
+        return tiles[point.getX()][point.getY()];
+    }
+
+    public void floorAWall(Point point){
+        tiles[point.getX()][point.getY()] = new Tile(Symbols.FLOOR, "Floor");
+        originalGrid[point.getX()][point.getY()] = new Tile(Symbols.FLOOR, "Floor");
+    }
+
     private void clearActorsAndProps() {
-        for (int i = 0; i < length; ++i) {
-            if (height >= 0) System.arraycopy(originalGrid[i], 0, tiles[i], 0, height);
+        for (int i = 0; i < height; ++i) {
+            if (length >= 0) System.arraycopy(originalGrid[i], 0, tiles[i], 0, length);
         }
     }
 
-    public void clearTile(Point point) {
+    public void spawnDoor() {
+        Point point = walkableTiles.get(new Random().nextInt(walkableTiles.size()));
+
         int x = point.getX();
         int y = point.getY();
 
-        tiles[x][y] = new Tile(Symbols.FLOOR, "Floor");
+        tiles[x][y] = new Tile(Symbols.DOOR, "Door");
     }
 
     public List<Point> getWalkableTiles() {

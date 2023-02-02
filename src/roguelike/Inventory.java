@@ -15,7 +15,7 @@ public class Inventory {
 
     public void addItemToInventory(Item item) {
         if (!isFull()) {
-            storage[currentSlotInStorage] = item;
+            storage[currentSlotInStorage] = new Item(item);
             ++currentSlotInStorage;
         } else {
             System.out.println("Inventory is full!");
@@ -35,12 +35,11 @@ public class Inventory {
     }
 
     public void printInventory() {
-        System.out.print("||");
+        System.out.print("|");
         for (Item item : storage) {
             if (item != null)
-                System.out.print("|&|");
+                System.out.print("&|");
         }
-        System.out.println("||");
     }
 
     public boolean isFull() {

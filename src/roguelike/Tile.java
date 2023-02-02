@@ -12,11 +12,15 @@ public class Tile {
     }
 
     public boolean isAbleToMoveOnThisTile() {
-        return squareType.getCharacterSymbol().equals("-") || squareType.getCharacterSymbol().equals("&") || squareType.getCharacterSymbol().equals("@");
+        return squareType.getSymbol() == Symbols.FLOOR || squareType.getSymbol() == Symbols.ITEM || squareType.getSymbol() == Symbols.DOOR;
     }
 
     public String getCharacterSymbol() {
         return squareType.getCharacterSymbol();
+    }
+
+    public Symbols getSymbol(){
+        return squareType.getSymbol();
     }
 
 }
