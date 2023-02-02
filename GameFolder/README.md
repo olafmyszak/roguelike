@@ -1,0 +1,1 @@
+Aby uruchomić grę, wystarczy pobrać ten folder, a następnie w terminalu wykonać komendę "java -jar RogueLike.jar".
