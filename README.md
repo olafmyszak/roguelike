@@ -1,40 +1,22 @@
-Nazwa: TBD
-
-Technologie: Java
-
-Fabuła: 
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Gracz trafia do nieznajomego lochu pełenego niebezpieczeństw. Nie ma żadnej drogi wstecz: aby się wydostać musi pokonać kolejne poziomy podziemii, by w końcu pokonać ostatecznego przeciwnika i ocalić przy tym ludzkość. Na jego drodze staną jednak rozmaite potwory jak duchy, wampiry czy zombie. Żeby przeżyć gracz będzie musiał sprawnie poruszać się po lochach oraz wykorzystwać napotkane przedmioty.
 
 Mechaniki:\
--walenie ze szpadla\
--dash\
--coraz lepsze przedmioty po drodze\
 -turowosc\
 -losowo generowany świat i potwory
 
-Postacie:\
--bezimienny protagonista:\
-    *mężczyzna\
-    *30-45 lat\
-    *doświadczony złodziej i wojownik\
-
--antagonista:\
-    *silny nekromanta
-
 Przeciwnicy:\
--szkielety\
+-duchy\
 -zombie\
 -nietoperze\
 -ostateczny boss nekromanta
 
 Przedmioty
--łopata\
--święty miecz\
--święty granat ręczny\
--mikstury\
+-zbroja\
+-miecz\
+-buty
+-tarcza\
+-pierścień\
 
-Grafika: ASCII
+Grafika: ASCII w terminalu
 
-Gameplay: Gracz zaczyna na cmentarzu, powoli podążając dalej (2-3 poziomy). Następnie wkracza w głąb katakumb (2-4 poziomy), by ostatecznie zmierzyć się z nekromantą na samym końcu. Możliwe również jakieś minibossy na końcu każdego poziomu.
-
+Technologie: Java
